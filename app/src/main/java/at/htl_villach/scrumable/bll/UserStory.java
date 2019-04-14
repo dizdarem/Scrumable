@@ -5,4 +5,5 @@ package at.htl_villach.scrumable.bll;
  */
 
 public class UserStory {
+    private int id;
 }
