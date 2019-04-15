@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <!--Todo: Add Pictures to MenuItems-->
+        <item
+            android:id="@+id/mitemProduct_Backlog"
+            android:title="@string/mitem_Product_Backlog" />
+        <item
+            android:id="@+id/mitemSprint_Backlog"
+            android:title="@string/mitem_Sprint_Backlog" />
+        <item
+            android:id="@+id/mitemScrumboard"
+            android:title="@string/mitem_Scrumboard" />
+        <!--<item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Tools" />-->
+    </group>
+</menu>
