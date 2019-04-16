@@ -23,10 +23,10 @@ public class ScrumActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrum);
-        initContolls();
+        initContolls(savedInstanceState);
     }
 
-    private void initContolls() {
+    private void initContolls(Bundle paramSavedInstanceState) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -38,6 +38,12 @@ public class ScrumActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if(paramSavedInstanceState == null) {
+            //Successfully loged in --> show on ScrumActivity ScrumboardFragment
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Scrumboard_Fragment()).commit();
+            navigationView.setCheckedItem(R.id.mitemScrumboard);
+        }
     }
 
     @Override
@@ -67,11 +73,11 @@ public class ScrumActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         switch (id) {
             case R.id.showProfile:
-                return true;
+                break;
             case R.id.myProjects:
-                return true;
+                break;
             case R.id.logout:
-                return true;
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -83,15 +89,19 @@ public class ScrumActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.mitemProduct_Backlog) {
-            //startActivity(new Intent(ScrumActivity.this, ProductBacklogActivity.class));
-            setTitle("Product Backlog");
-        } else if (id == R.id.mitemSprint_Backlog) {
-            //startActivity(new Intent(ScrumActivity.this, SprintBacklogActivity.class));
-            setTitle("Sprint Backlog");
-        } else if (id == R.id.mitemScrumboard) {
-            //startActivity(new Intent(ScrumActivity.this, ScrumActivity.class));
-            setTitle("Scrumboard");
+        switch (id) {
+            case R.id.mitemProduct_Backlog:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProductBacklog_Fragment()).commit();
+                setTitle(R.string.mitem_Product_Backlog);
+                break;
+            case R.id.mitemSprint_Backlog:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SprintBacklog_Fragment()).commit();
+                setTitle(R.string.mitem_Sprint_Backlog);
+                break;
+            case R.id.mitemScrumboard:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Scrumboard_Fragment()).commit();
+                setTitle(R.string.mitem_Scrumboard);
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
