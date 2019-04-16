@@ -1,10 +1,6 @@
 package at.htl_villach.scrumable.app;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import at.htl_villach.scrumable.R;
 
@@ -73,10 +70,13 @@ public class ScrumActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         switch (id) {
             case R.id.showProfile:
+                //toDo: Open new Intent
                 break;
             case R.id.myProjects:
+                //toDo: open new Intent
                 break;
             case R.id.logout:
+                //toDo: Open Dialog to Logout
                 break;
         }
 

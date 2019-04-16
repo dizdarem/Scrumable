@@ -1,8 +1,8 @@
 package at.htl_villach.scrumable.app;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -19,6 +19,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void initControlls() {
+        //toDo: Build Register/Login
         btnScrumActivity = (Button) findViewById(R.id.btnScrumActivity);
 
         btnScrumActivity.setOnClickListener(new View.OnClickListener() {

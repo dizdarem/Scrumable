@@ -15,5 +15,6 @@ public class Scrumboard_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_scrumboard, container, false);
+        //toDo: Show Scrumboard with several Fragments (ToDo, InProcess, Testing, Done) by swiping to the right/left
     }
 }

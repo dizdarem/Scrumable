@@ -15,5 +15,6 @@ public class SprintBacklog_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_sprint_backlog, container, false);
+        //toDo: Show List of all BacklogItems of that Sprint
     }
 }
