@@ -4,10 +4,11 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Scrumable</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
     <string name="mitem_Scrumboard">Scrumboard</string>
     <string name="mitem_Sprint_Backlog">Sprint Backlog</string>
     <string name="mitem_Product_Backlog">Product Backlog</string>
+    <string name="show_rofile">Show Profile</string>
+    <string name="my_projects">My Projects</string>
+    <string name="logout">Logout</string>
 </resources>
