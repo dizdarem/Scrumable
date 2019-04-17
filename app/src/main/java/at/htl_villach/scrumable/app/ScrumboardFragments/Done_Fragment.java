@@ -1,4 +1,4 @@
-package at.htl_villach.scrumable.app;
+package at.htl_villach.scrumable.app.ScrumboardFragments;
 
 import android.content.Context;
 import android.net.Uri;

@@ -10,9 +10,12 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
 
 import at.htl_villach.scrumable.R;
+import at.htl_villach.scrumable.app.ScrumboardFragments.Done_Fragment;
+import at.htl_villach.scrumable.app.ScrumboardFragments.InProcess_Fragment;
+import at.htl_villach.scrumable.app.ScrumboardFragments.Testing_Fragment;
+import at.htl_villach.scrumable.app.ScrumboardFragments.ToDo_Fragment;
 
 public class Scrumboard_Fragment extends Fragment implements ToDo_Fragment.OnFragmentInteractionListener, InProcess_Fragment.OnFragmentInteractionListener, Testing_Fragment.OnFragmentInteractionListener, Done_Fragment.OnFragmentInteractionListener{
     @Nullable
@@ -28,7 +31,7 @@ public class Scrumboard_Fragment extends Fragment implements ToDo_Fragment.OnFra
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager)x.findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter(getChildFragmentManager(), tabLayout.getTabCount());
+        final ScrumboardPagerAdapter adapter = new ScrumboardPagerAdapter(getChildFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 

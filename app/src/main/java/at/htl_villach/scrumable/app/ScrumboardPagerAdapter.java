@@ -4,11 +4,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-public class PagerAdapter extends FragmentStatePagerAdapter {
+import at.htl_villach.scrumable.app.ScrumboardFragments.Done_Fragment;
+import at.htl_villach.scrumable.app.ScrumboardFragments.InProcess_Fragment;
+import at.htl_villach.scrumable.app.ScrumboardFragments.Testing_Fragment;
+import at.htl_villach.scrumable.app.ScrumboardFragments.ToDo_Fragment;
+
+public class ScrumboardPagerAdapter extends FragmentStatePagerAdapter {
 
     int nrOfTabs;
 
-    public PagerAdapter(FragmentManager fm, int nrOfTabs) {
+    public ScrumboardPagerAdapter(FragmentManager fm, int nrOfTabs) {
         super(fm);
         this.nrOfTabs = nrOfTabs;
     }
