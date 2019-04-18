@@ -7,8 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import at.htl_villach.scrumable.R;
+import at.htl_villach.scrumable.bll.BacklogItem;
+import at.htl_villach.scrumable.bll.StatusEnum;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +29,9 @@ public class ToDo_Fragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private ListView listViewToDo;
+    private ArrayList<BacklogItem> testDataList;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -65,7 +74,19 @@ public class ToDo_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_todo, container, false);
+        View view = inflater.inflate(R.layout.fragment_todo, container, false);
+        listViewToDo = (ListView)view.findViewById(R.id.listViewToDo);
+        testDataList = new ArrayList<>();
+
+        listViewToDo.setAdapter(new ArrayAdapter<BacklogItem>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, generateTestData()));
+        return view;
+    }
+
+    private ArrayList<BacklogItem> generateTestData() {
+        for(int i=1; i<=5; i++) {
+            testDataList.add(new BacklogItem(i, "ToDo_ " + i, "ToDo_"+ i, StatusEnum.TODO));
+        }
+        return testDataList;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
