@@ -1,73 +1,38 @@
 package at.htl_villach.scrumable.app.ScrumboardFragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import at.htl_villach.scrumable.R;
 import at.htl_villach.scrumable.bll.BacklogItem;
+import at.htl_villach.scrumable.bll.BacklogItems_Adapter;
 import at.htl_villach.scrumable.bll.StatusEnum;
+import at.htl_villach.scrumable.bll.User;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ToDo_Fragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ToDo_Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ToDo_Fragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private ListView listViewToDo;
+    private RecyclerView recyclerViewToDo;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
     private ArrayList<BacklogItem> testDataList;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
-    public ToDo_Fragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ToDo_Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ToDo_Fragment newInstance(String param1, String param2) {
         ToDo_Fragment fragment = new ToDo_Fragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -75,53 +40,27 @@ public class ToDo_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_todo, container, false);
-        listViewToDo = (ListView)view.findViewById(R.id.listViewToDo);
         testDataList = new ArrayList<>();
 
-        listViewToDo.setAdapter(new ArrayAdapter<BacklogItem>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, generateTestData()));
+        recyclerViewToDo = view.findViewById(R.id.recyclerViewToDo);
+        recyclerViewToDo.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+        adapter = new BacklogItems_Adapter(generateTestData());
+
+        recyclerViewToDo.setLayoutManager(layoutManager);
+        recyclerViewToDo.setAdapter(adapter);
+
         return view;
     }
 
     private ArrayList<BacklogItem> generateTestData() {
         for(int i=1; i<=5; i++) {
-            testDataList.add(new BacklogItem(i, "ToDo_ " + i, "ToDo_"+ i, StatusEnum.TODO));
+            User user = new User("User_" + i, "User_" + i, new Date());
+            testDataList.add(new BacklogItem(i, "ToDo_ " + i, "Describtion of ToDo_"+ i, StatusEnum.TODO, user));
         }
         return testDataList;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

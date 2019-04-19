@@ -9,12 +9,14 @@ public class BacklogItem {
     private String title;
     private String describtion;
     private StatusEnum status = StatusEnum.PRODUCT_BACKLOG; //default: in Product backlog
+    private User editor;
 
-    public BacklogItem(int id, String title, String describtion, StatusEnum status) {
+    public BacklogItem(int id, String title, String describtion, StatusEnum status, User editor) {
         this.id = id;
         this.title = title;
         this.describtion = describtion;
         this.status = status;
+        this.editor = editor;
     }
 
     public int getId() {
@@ -49,6 +51,14 @@ public class BacklogItem {
         this.status = status;
     }
 
+    public User getEditor() {
+        return editor;
+    }
+
+    public void setEditor(User editor) {
+        this.editor = editor;
+    }
+
     @Override
     public String toString() {
         return "BacklogItem{" +
@@ -56,6 +66,7 @@ public class BacklogItem {
                 ", title='" + title + '\'' +
                 ", describtion='" + describtion + '\'' +
                 ", status=" + status +
+                ", editor=" + editor +
                 '}';
     }
 }

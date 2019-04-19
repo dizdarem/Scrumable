@@ -1,6 +1,5 @@
 package at.htl_villach.scrumable.app;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -54,13 +53,5 @@ public class Scrumboard_Fragment extends Fragment implements ToDo_Fragment.OnFra
 
         return x;
         //toDo: Show Scrumboard with several Fragments (ToDo, InProcess, Testing, Done) by swiping to the right/left
-    }
-
-
-
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 }
