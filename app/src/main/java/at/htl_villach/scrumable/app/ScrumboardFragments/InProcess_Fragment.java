@@ -7,8 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,7 +40,7 @@ public class InProcess_Fragment extends Fragment {
         recyclerViewInProcess = view.findViewById(R.id.recyclerViewInProcess);
         recyclerViewInProcess.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItems_Adapter(generateTestData());
+        adapter = new BacklogItems_Adapter(generateTestData(), getActivity());
 
         recyclerViewInProcess.setLayoutManager(layoutManager);
         recyclerViewInProcess.setAdapter(adapter);

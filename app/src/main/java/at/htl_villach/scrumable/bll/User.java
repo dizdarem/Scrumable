@@ -1,7 +1,5 @@
 package at.htl_villach.scrumable.bll;
 
-import android.widget.DatePicker;
-
 import java.util.Date;
 
 public class User {
