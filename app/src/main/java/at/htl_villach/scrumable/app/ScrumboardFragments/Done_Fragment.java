@@ -14,6 +14,7 @@ import java.util.Date;
 import at.htl_villach.scrumable.R;
 import at.htl_villach.scrumable.bll.BacklogItem;
 import at.htl_villach.scrumable.bll.BacklogItems_Adapter;
+import at.htl_villach.scrumable.bll.PopupOptionMenuEnum;
 import at.htl_villach.scrumable.bll.StatusEnum;
 import at.htl_villach.scrumable.bll.User;
 
@@ -39,7 +40,7 @@ public class Done_Fragment extends Fragment {
         recyclerViewDone = view.findViewById(R.id.recyclerViewDone);
         recyclerViewDone.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItems_Adapter(generateTestData(), getActivity());
+        adapter = new BacklogItems_Adapter(generateTestData(), getActivity(), PopupOptionMenuEnum.SCRUMBOARD);
 
         recyclerViewDone.setLayoutManager(layoutManager);
         recyclerViewDone.setAdapter(adapter);
@@ -50,7 +51,7 @@ public class Done_Fragment extends Fragment {
     private ArrayList<BacklogItem> generateTestData() {
         for(int i=1; i<=5; i++) {
             User user = new User("User_" + i, "User_" + i, new Date());
-            testDataList.add(new BacklogItem(i, "Done_ " + i, "Describtion of Done_"+ i, StatusEnum.TODO, user));
+            testDataList.add(new BacklogItem(i, "Done_ " + i, "Describtion of Done_"+ i, StatusEnum.DONE, user));
         }
         return testDataList;
     }

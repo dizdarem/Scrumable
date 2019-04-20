@@ -14,6 +14,7 @@ import java.util.Date;
 import at.htl_villach.scrumable.R;
 import at.htl_villach.scrumable.bll.BacklogItem;
 import at.htl_villach.scrumable.bll.BacklogItems_Adapter;
+import at.htl_villach.scrumable.bll.PopupOptionMenuEnum;
 import at.htl_villach.scrumable.bll.StatusEnum;
 import at.htl_villach.scrumable.bll.User;
 
@@ -40,7 +41,7 @@ public class ToDo_Fragment extends Fragment {
         recyclerViewToDo = view.findViewById(R.id.recyclerViewToDo);
         recyclerViewToDo.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItems_Adapter(generateTestData(), getActivity());
+        adapter = new BacklogItems_Adapter(generateTestData(), getActivity(), PopupOptionMenuEnum.SCRUMBOARD);
 
         recyclerViewToDo.setLayoutManager(layoutManager);
         recyclerViewToDo.setAdapter(adapter);

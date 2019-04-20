@@ -5,10 +5,10 @@
 
     <item
         android:id="@+id/item_move_to_ProductBL"
-        android:title="Move To Product BL"
-        />
+        android:title="Move To Product BL" />
 
     <item
-        android:id="@+id/item_move_to_SprintBL"
-        android:title="Move To Sprint BL" />
+        android:id="@+id/item_move_to_Scrumboard"
+        android:title="Move To Scrumboard"
+        />
 </menu>

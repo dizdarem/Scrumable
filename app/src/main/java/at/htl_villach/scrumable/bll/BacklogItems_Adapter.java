@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ import at.htl_villach.scrumable.R;
 public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adapter.BacklogItemViewHolder> {
     private ArrayList<BacklogItem> backlogItemList;
     private Context context;
+    private PopupOptionMenuEnum popupOptionMenuEnum;
 
     public static class BacklogItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -34,9 +36,10 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
         }
     }
 
-    public BacklogItems_Adapter(ArrayList<BacklogItem> paramBacklogItemlist, Context context) {
+    public BacklogItems_Adapter(ArrayList<BacklogItem> paramBacklogItemlist, Context context, PopupOptionMenuEnum popupOptionMenuEnum) {
         this.backlogItemList = paramBacklogItemlist;
         this.context = context;
+        this.popupOptionMenuEnum = popupOptionMenuEnum;
     }
 
     @NonNull
@@ -50,7 +53,7 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
 
     @Override
     public void onBindViewHolder(@NonNull final BacklogItemViewHolder backlogItemViewHolder, final int position) {
-        BacklogItem selectedBacklogItem = backlogItemList.get(position);
+        final BacklogItem selectedBacklogItem = backlogItemList.get(position);
 
         backlogItemViewHolder.title.setText(selectedBacklogItem.getTitle());
         backlogItemViewHolder.describtion.setText(selectedBacklogItem.getDescribtion());
@@ -60,29 +63,16 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(context, backlogItemViewHolder.options);
-                popupMenu.inflate(R.menu.option_menu_backlog_item);
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case 0:
-                                //ToDo: Move Item to Product BL
-                                /*
-                                backlogItemList.remove(position);
-                                notifyDataSetChanged();
-                                */
-                                break;
-                            case 1:
-                                //ToDo: Move Item to Sprint BL
-                                /*
-                                backlogItemList.remove(position);
-                                notifyDataSetChanged();
-                                */
-                                break;
-                        }
-                        return false;
-                    }
-                });
+                if(popupOptionMenuEnum == PopupOptionMenuEnum.PRODUCT_BACKLOG) {
+                    popupMenu.inflate(R.menu.option_menu_backlog_item_productbacklog);
+                    initPopUpMenuProductBacklog(popupMenu, selectedBacklogItem);
+                } else if(popupOptionMenuEnum == PopupOptionMenuEnum.SPRINT_BACKLOG) {
+                    popupMenu.inflate(R.menu.option_menu_backlog_item_sprintbacklog);
+                    initPopUpMenuSprintBacklog(popupMenu, selectedBacklogItem);
+                } else if(popupOptionMenuEnum == PopupOptionMenuEnum.SCRUMBOARD) {
+                    popupMenu.inflate(R.menu.option_menu_backlog_item_scrumboard);
+                    initPopUpMenuScrumboard(popupMenu, selectedBacklogItem);
+                }
                 popupMenu.show();
             }
         });
@@ -91,5 +81,86 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
     @Override
     public int getItemCount() {
         return backlogItemList.size();
+    }
+
+    private void initPopUpMenuProductBacklog(final PopupMenu popupMenu, final BacklogItem selectedBacklogItem) {
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case 0:
+                        //ToDo: Move Item to Sprint BL
+                                /*
+                                backlogItemList.remove(position);
+                                notifyDataSetChanged();
+                                */
+                        Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Sprint Backlog", Toast.LENGTH_LONG).show();
+                        break;
+                    case 1:
+                        //ToDo: Move Item to Sprint BL
+                                /*
+                                backlogItemList.remove(position);
+                                notifyDataSetChanged();
+                                */
+                        Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Scrumboard", Toast.LENGTH_LONG).show();
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void initPopUpMenuSprintBacklog(final PopupMenu popupMenu, final BacklogItem selectedBacklogItem) {
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case 0:
+                        //ToDo: Move Item to Product BL
+                                /*
+                                backlogItemList.remove(position);
+                                notifyDataSetChanged();
+                                */
+                        Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Product Backlog", Toast.LENGTH_LONG).show();
+                        break;
+                    case 1:
+                        //ToDo: Move Item to Scrumboard
+                                /*
+                                backlogItemList.remove(position);
+                                notifyDataSetChanged();
+                                */
+                        Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Scrumboard", Toast.LENGTH_LONG).show();
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void initPopUpMenuScrumboard(final PopupMenu popupMenu, final BacklogItem selectedBacklogItem) {
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case 0:
+                        //ToDo: Move Item to Product BL
+                                /*
+                                backlogItemList.remove(position);
+                                notifyDataSetChanged();
+                                */
+                        Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Product Backlog", Toast.LENGTH_LONG).show();
+                        break;
+                    case 1:
+                        //ToDo: Move Item to Sprint BL
+                                /*
+                                backlogItemList.remove(position);
+                                notifyDataSetChanged();
+                                */
+                        Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Sprint Backlog", Toast.LENGTH_LONG).show();
+                        break;
+                }
+                return false;
+            }
+        });
     }
 }

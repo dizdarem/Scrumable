@@ -14,6 +14,7 @@ import java.util.Date;
 import at.htl_villach.scrumable.R;
 import at.htl_villach.scrumable.bll.BacklogItem;
 import at.htl_villach.scrumable.bll.BacklogItems_Adapter;
+import at.htl_villach.scrumable.bll.PopupOptionMenuEnum;
 import at.htl_villach.scrumable.bll.StatusEnum;
 import at.htl_villach.scrumable.bll.User;
 
@@ -40,7 +41,7 @@ public class InProcess_Fragment extends Fragment {
         recyclerViewInProcess = view.findViewById(R.id.recyclerViewInProcess);
         recyclerViewInProcess.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItems_Adapter(generateTestData(), getActivity());
+        adapter = new BacklogItems_Adapter(generateTestData(), getActivity(), PopupOptionMenuEnum.SCRUMBOARD);
 
         recyclerViewInProcess.setLayoutManager(layoutManager);
         recyclerViewInProcess.setAdapter(adapter);
@@ -51,7 +52,7 @@ public class InProcess_Fragment extends Fragment {
     private ArrayList<BacklogItem> generateTestData() {
         for(int i=1; i<=5; i++) {
             User user = new User("User_" + i, "User_" + i, new Date());
-            testDataList.add(new BacklogItem(i, "InProcess_ " + i, "Describtion of InProcess_"+ i, StatusEnum.TODO, user));
+            testDataList.add(new BacklogItem(i, "InProcess_ " + i, "Describtion of InProcess_"+ i, StatusEnum.IN_PROCESS, user));
         }
         return testDataList;
     }
