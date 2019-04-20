@@ -1,5 +1,6 @@
 package at.htl_villach.scrumable.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +24,7 @@ import at.htl_villach.scrumable.bll.User;
 
 public class ProductBacklog_Fragment extends Fragment {
     private RecyclerView recyclerViewProductBacklog;
-    private RecyclerView.Adapter adapter;
+    private BacklogItems_Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<BacklogItem> testDataList;
 
@@ -47,6 +49,13 @@ public class ProductBacklog_Fragment extends Fragment {
 
         recyclerViewProductBacklog.setLayoutManager(layoutManager);
         recyclerViewProductBacklog.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new BacklogItems_Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                startActivity(new Intent(getActivity(), DetailsActivity.class));
+            }
+        });
 
         return view;
     }

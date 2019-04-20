@@ -1,5 +1,6 @@
 package at.htl_villach.scrumable.app.ScrumboardFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import at.htl_villach.scrumable.R;
+import at.htl_villach.scrumable.app.DetailsActivity;
 import at.htl_villach.scrumable.bll.BacklogItem;
 import at.htl_villach.scrumable.bll.BacklogItems_Adapter;
 import at.htl_villach.scrumable.bll.PopupOptionMenuEnum;
@@ -20,7 +22,7 @@ import at.htl_villach.scrumable.bll.User;
 
 public class Done_Fragment extends Fragment {
     private RecyclerView recyclerViewDone;
-    private RecyclerView.Adapter adapter;
+    private BacklogItems_Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<BacklogItem> testDataList;
 
@@ -44,6 +46,13 @@ public class Done_Fragment extends Fragment {
 
         recyclerViewDone.setLayoutManager(layoutManager);
         recyclerViewDone.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new BacklogItems_Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                startActivity(new Intent(getActivity(), DetailsActivity.class));
+            }
+        });
 
         return view;
     }

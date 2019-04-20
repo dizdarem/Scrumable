@@ -1,5 +1,7 @@
 package at.htl_villach.scrumable.app;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,9 +24,11 @@ import at.htl_villach.scrumable.bll.User;
 
 public class SprintBacklog_Fragment extends Fragment {
     private RecyclerView recyclerViewSprintBacklog;
-    private RecyclerView.Adapter adapter;
+    private BacklogItems_Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<BacklogItem> testDataList;
+
+    View view;
 
     public static SprintBacklog_Fragment newInstance() {
         SprintBacklog_Fragment fragment = new SprintBacklog_Fragment();
@@ -33,11 +37,35 @@ public class SprintBacklog_Fragment extends Fragment {
         return fragment;
     }
 
+    public SprintBacklog_Fragment() {
+        initControls();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_sprint_backlog, container, false);
 
+        initControls();
+
+        adapter.setOnItemClickListener(new BacklogItems_Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                startActivity(new Intent(getActivity(), DetailsActivity.class));
+            }
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initControls();
+    }
+
+    private void initControls() {
         recyclerViewSprintBacklog = (RecyclerView)view.findViewById(R.id.recyclerViewSprintBacklog);
         testDataList = new ArrayList<>();
 
@@ -47,8 +75,6 @@ public class SprintBacklog_Fragment extends Fragment {
 
         recyclerViewSprintBacklog.setLayoutManager(layoutManager);
         recyclerViewSprintBacklog.setAdapter(adapter);
-
-        return view;
     }
 
     private ArrayList<BacklogItem> generateTestData() {
@@ -57,5 +83,15 @@ public class SprintBacklog_Fragment extends Fragment {
             testDataList.add(new BacklogItem(i, "Sprint_Backlog_ " + i, "Describtion of Sprint_Backlog_"+ i, StatusEnum.SPRINT_BACKLOG, user));
         }
         return testDataList;
+    }
+
+    public void addListItem(BacklogItem selectedBacklogItem) {
+        testDataList.add(selectedBacklogItem);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void removeListItem(BacklogItem selectedBacklogItem) {
+        testDataList.remove(selectedBacklogItem);
+        adapter.notifyDataSetChanged();
     }
 }
