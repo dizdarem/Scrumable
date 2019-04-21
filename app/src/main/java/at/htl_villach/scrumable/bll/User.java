@@ -1,8 +1,11 @@
 package at.htl_villach.scrumable.bll;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class User {
+public class User implements Parcelable {
     private String username;
     private String password;
     private Date date;
@@ -16,6 +19,22 @@ public class User {
     public User(String username) {
         this.username = username;
     }
+
+    protected User(Parcel in) {
+        username = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public String getUsername() {
         return username;
@@ -44,5 +63,15 @@ public class User {
     @Override
     public String toString() {
         return username.toString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(username);
     }
 }

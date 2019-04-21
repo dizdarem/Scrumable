@@ -14,7 +14,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import at.htl_villach.scrumable.R;
-import at.htl_villach.scrumable.app.SprintBacklog_Fragment;
 
 public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adapter.BacklogItemViewHolder> {
     private ArrayList<BacklogItem> backlogItemList;
@@ -77,8 +76,6 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
     public void onBindViewHolder(@NonNull final BacklogItemViewHolder backlogItemViewHolder, final int position) {
         final BacklogItem selectedBacklogItem = backlogItemList.get(position);
         int curPosition = position;
-
-
 
         backlogItemViewHolder.title.setText(selectedBacklogItem.getTitle());
         backlogItemViewHolder.describtion.setText(selectedBacklogItem.getDescribtion());

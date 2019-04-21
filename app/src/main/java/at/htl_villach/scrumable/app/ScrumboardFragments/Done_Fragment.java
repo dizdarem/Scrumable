@@ -50,7 +50,9 @@ public class Done_Fragment extends Fragment {
         adapter.setOnItemClickListener(new BacklogItems_Adapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                startActivity(new Intent(getActivity(), DetailsActivity.class));
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("selectedListItemObj", testDataList.get(position));
+                startActivity(intent);
             }
         });
 

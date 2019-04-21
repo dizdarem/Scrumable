@@ -1,6 +1,5 @@
 package at.htl_villach.scrumable.app;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,8 +27,6 @@ public class SprintBacklog_Fragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<BacklogItem> testDataList;
 
-    View view;
-
     public static SprintBacklog_Fragment newInstance() {
         SprintBacklog_Fragment fragment = new SprintBacklog_Fragment();
         Bundle args = new Bundle();
@@ -38,34 +35,15 @@ public class SprintBacklog_Fragment extends Fragment {
     }
 
     public SprintBacklog_Fragment() {
-        initControls();
+
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_sprint_backlog, container, false);
 
-        initControls();
-
-        adapter.setOnItemClickListener(new BacklogItems_Adapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                startActivity(new Intent(getActivity(), DetailsActivity.class));
-            }
-        });
-
-        return view;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initControls();
-    }
-
-    private void initControls() {
         recyclerViewSprintBacklog = (RecyclerView)view.findViewById(R.id.recyclerViewSprintBacklog);
         testDataList = new ArrayList<>();
 
@@ -75,6 +53,17 @@ public class SprintBacklog_Fragment extends Fragment {
 
         recyclerViewSprintBacklog.setLayoutManager(layoutManager);
         recyclerViewSprintBacklog.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new BacklogItems_Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("selectedListItemObj", testDataList.get(position));
+                startActivity(intent);
+            }
+        });
+
+        return view;
     }
 
     private ArrayList<BacklogItem> generateTestData() {

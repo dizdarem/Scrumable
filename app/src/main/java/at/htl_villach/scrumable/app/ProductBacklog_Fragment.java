@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,7 +52,9 @@ public class ProductBacklog_Fragment extends Fragment {
         adapter.setOnItemClickListener(new BacklogItems_Adapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                startActivity(new Intent(getActivity(), DetailsActivity.class));
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("selectedListItemObj", testDataList.get(position));
+                startActivity(intent);
             }
         });
 
@@ -66,5 +67,15 @@ public class ProductBacklog_Fragment extends Fragment {
             testDataList.add(new BacklogItem(i, "Product_Backlog_ " + i, "Describtion of Prodcut_Backlog_"+ i, StatusEnum.PRODUCT_BACKLOG, user));
         }
         return testDataList;
+    }
+
+    public void addListItem(BacklogItem selectedBacklogItem) {
+        testDataList.add(selectedBacklogItem);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void removeListItem(BacklogItem selectedBacklogItem) {
+        testDataList.remove(selectedBacklogItem);
+        adapter.notifyDataSetChanged();
     }
 }
