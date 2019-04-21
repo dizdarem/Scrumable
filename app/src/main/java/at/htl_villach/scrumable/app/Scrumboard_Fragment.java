@@ -52,6 +52,5 @@ public class Scrumboard_Fragment extends Fragment implements ToDo_Fragment.OnFra
         });
 
         return x;
-        //toDo: Show Scrumboard with several Fragments (ToDo, InProcess, Testing, Done) by swiping to the right/left
     }
 }

@@ -5,14 +5,19 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Scrumable</string>
     <string name="nav_header_desc">Navigation header</string>
+
     <string name="mitem_Scrumboard">Scrumboard</string>
     <string name="mitem_Sprint_Backlog">Sprint Backlog</string>
     <string name="mitem_Product_Backlog">Product Backlog</string>
-    <string name="show_rofile">Show Profile</string>
+
+    <string name="tab_Scrumboard_ToDo">ToDo</string>
+    <string name="tab_Scrumboard_InProcess">In Proe</string>
+    <string name="tab_Scrumboard_Testing">Testing</string>
+    <string name="tab_Scrumboard_Done">Done</string>
+
+    <string name="show_profile">Show Profile</string>
     <string name="my_projects">My Projects</string>
     <string name="logout">Logout</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_details">DetailsActivity</string>
 </resources>
