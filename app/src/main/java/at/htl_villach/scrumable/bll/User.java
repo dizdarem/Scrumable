@@ -2,7 +2,9 @@ package at.htl_villach.scrumable.bll;
 
 import android.widget.DatePicker;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String username;
     private String password;
     private DatePicker date;
