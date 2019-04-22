@@ -3,9 +3,10 @@ package at.htl_villach.scrumable.bll;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Parcelable {
+public class User implements Parcelable, Serializable {
     private String username;
     private String password;
     private Date date;
