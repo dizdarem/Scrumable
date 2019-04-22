@@ -44,12 +44,18 @@ public class SprintBacklog_Fragment extends Fragment {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_sprint_backlog, container, false);
 
+        init(view);
+
+        return view;
+    }
+
+    public void init(View view) {
         recyclerViewSprintBacklog = (RecyclerView)view.findViewById(R.id.recyclerViewSprintBacklog);
         testDataList = new ArrayList<>();
 
         recyclerViewSprintBacklog.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItems_Adapter(generateTestData(), getActivity(), PopupOptionMenuEnum.SPRINT_BACKLOG);
+        adapter = new BacklogItems_Adapter(generateTestData(), getActivity(), PopupOptionMenuEnum.SPRINT_BACKLOG, getView());
 
         recyclerViewSprintBacklog.setLayoutManager(layoutManager);
         recyclerViewSprintBacklog.setAdapter(adapter);
@@ -62,8 +68,6 @@ public class SprintBacklog_Fragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        return view;
     }
 
     private ArrayList<BacklogItem> generateTestData() {
@@ -74,7 +78,8 @@ public class SprintBacklog_Fragment extends Fragment {
         return testDataList;
     }
 
-    public void addListItem(BacklogItem selectedBacklogItem) {
+    public void addListItem(BacklogItem selectedBacklogItem, View view) {
+        init(view);
         testDataList.add(selectedBacklogItem);
         adapter.notifyDataSetChanged();
     }

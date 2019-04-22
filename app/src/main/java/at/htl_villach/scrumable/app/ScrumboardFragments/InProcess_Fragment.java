@@ -43,7 +43,7 @@ public class InProcess_Fragment extends Fragment {
         recyclerViewInProcess = view.findViewById(R.id.recyclerViewInProcess);
         recyclerViewInProcess.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItems_Adapter(generateTestData(), getActivity(), PopupOptionMenuEnum.SCRUMBOARD);
+        adapter = new BacklogItems_Adapter(generateTestData(), getActivity(), PopupOptionMenuEnum.SCRUMBOARD, getView());
 
         recyclerViewInProcess.setLayoutManager(layoutManager);
         recyclerViewInProcess.setAdapter(adapter);

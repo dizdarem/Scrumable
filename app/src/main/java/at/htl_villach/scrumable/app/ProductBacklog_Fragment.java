@@ -44,7 +44,7 @@ public class ProductBacklog_Fragment extends Fragment {
 
         recyclerViewProductBacklog.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItems_Adapter(generateTestData(), getActivity(), PopupOptionMenuEnum.PRODUCT_BACKLOG);
+        adapter = new BacklogItems_Adapter(generateTestData(), getActivity(), PopupOptionMenuEnum.PRODUCT_BACKLOG, getView());
 
         recyclerViewProductBacklog.setLayoutManager(layoutManager);
         recyclerViewProductBacklog.setAdapter(adapter);

@@ -18,6 +18,7 @@ import at.htl_villach.scrumable.R;
 public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adapter.BacklogItemViewHolder> {
     private ArrayList<BacklogItem> backlogItemList;
     private Context context;
+    private View view;
     private PopupOptionMenuEnum popupOptionMenuEnum;
     private OnItemClickListener mListener;
 
@@ -57,10 +58,11 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
         }
     }
 
-    public BacklogItems_Adapter(ArrayList<BacklogItem> paramBacklogItemlist, Context context, PopupOptionMenuEnum popupOptionMenuEnum) {
+    public BacklogItems_Adapter(ArrayList<BacklogItem> paramBacklogItemlist, Context context, PopupOptionMenuEnum popupOptionMenuEnum, View view) {
         this.backlogItemList = paramBacklogItemlist;
         this.context = context;
         this.popupOptionMenuEnum = popupOptionMenuEnum;
+        this.view = view;
     }
 
     @NonNull
@@ -87,13 +89,13 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
                 PopupMenu popupMenu = new PopupMenu(context, backlogItemViewHolder.options);
                 if(popupOptionMenuEnum == PopupOptionMenuEnum.PRODUCT_BACKLOG) {
                     popupMenu.inflate(R.menu.option_menu_backlog_item_productbacklog);
-                    initPopUpMenuProductBacklog(popupMenu, selectedBacklogItem, position);
+                    initPopUpMenuProductBacklog(popupMenu, selectedBacklogItem);
                 } else if(popupOptionMenuEnum == PopupOptionMenuEnum.SPRINT_BACKLOG) {
                     popupMenu.inflate(R.menu.option_menu_backlog_item_sprintbacklog);
-                    initPopUpMenuSprintBacklog(popupMenu, selectedBacklogItem, position);
+                    initPopUpMenuSprintBacklog(popupMenu, selectedBacklogItem);
                 } else if(popupOptionMenuEnum == PopupOptionMenuEnum.SCRUMBOARD) {
                     popupMenu.inflate(R.menu.option_menu_backlog_item_scrumboard);
-                    initPopUpMenuScrumboard(popupMenu, selectedBacklogItem, position);
+                    initPopUpMenuScrumboard(popupMenu, selectedBacklogItem);
                 }
                 popupMenu.show();
             }
@@ -105,22 +107,28 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
         return backlogItemList.size();
     }
 
-    private void initPopUpMenuProductBacklog(final PopupMenu popupMenu, final BacklogItem selectedBacklogItem, final int position) {
+    private void initPopUpMenuProductBacklog(final PopupMenu popupMenu, final BacklogItem selectedBacklogItem) {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.item_move_to_SprintBL:
-                        //ToDo: Move Item to Sprint BL
-                        //backlogItemList.remove(selectedBacklogItem);
-                        //notifyDataSetChanged();
+                        backlogItemList.remove(selectedBacklogItem);
+                        notifyDataSetChanged();
 
-                        //SprintBacklog_Fragment fragment = new SprintBacklog_Fragment();
-                        //fragment.addListItem(selectedBacklogItem);
+                        //ToDo: Move Item to Sprint BL
+
+                        //SprintBacklog_Fragment fragment = SprintBacklog_Fragment.newInstance();
+                        //fragment.addListItem(selectedBacklogItem, view);
+
                         Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Sprint Backlog", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.item_move_to_Scrumboard:
+                        backlogItemList.remove(selectedBacklogItem);
+                        notifyDataSetChanged();
+
                         //ToDo: Move Item to Scrumboard - Column ToDo
+
                         Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Scrumboard", Toast.LENGTH_LONG).show();
                         break;
                     default:
@@ -131,21 +139,25 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
         });
     }
 
-    private void initPopUpMenuSprintBacklog(final PopupMenu popupMenu, final BacklogItem selectedBacklogItem, final int position) {
+    private void initPopUpMenuSprintBacklog(final PopupMenu popupMenu, final BacklogItem selectedBacklogItem) {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.item_move_to_ProductBL:
+                        backlogItemList.remove(selectedBacklogItem);
+                        notifyDataSetChanged();
+
                         //ToDo: Move Item to Product BL
-                                backlogItemList.remove(position);
-                                notifyDataSetChanged();
+
                         Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Product Backlog", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.item_move_to_Scrumboard:
+                        backlogItemList.remove(selectedBacklogItem);
+                        notifyDataSetChanged();
+
                         //ToDo: Move Item to Scrumboard
-                                backlogItemList.remove(position);
-                                notifyDataSetChanged();
+
                         Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Scrumboard", Toast.LENGTH_LONG).show();
                         break;
                     default:
@@ -156,21 +168,25 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
         });
     }
 
-    private void initPopUpMenuScrumboard(final PopupMenu popupMenu, final BacklogItem selectedBacklogItem, final int position) {
+    private void initPopUpMenuScrumboard(final PopupMenu popupMenu, final BacklogItem selectedBacklogItem) {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.item_move_to_ProductBL:
+                        backlogItemList.remove(selectedBacklogItem);
+                        notifyDataSetChanged();
+
                         //ToDo: Move Item to Product BL
-                                backlogItemList.remove(position);
-                                notifyDataSetChanged();
+
                         Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Product Backlog", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.item_move_to_SprintBL:
+                        backlogItemList.remove(selectedBacklogItem);
+                        notifyDataSetChanged();
+
                         //ToDo: Move Item to Sprint BL
-                                backlogItemList.remove(position);
-                                notifyDataSetChanged();
+
                         Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Sprint Backlog", Toast.LENGTH_LONG).show();
                         break;
                     default:

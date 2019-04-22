@@ -43,7 +43,7 @@ public class ToDo_Fragment extends Fragment {
         recyclerViewToDo = view.findViewById(R.id.recyclerViewToDo);
         recyclerViewToDo.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItems_Adapter(generateTestData(), getActivity(), PopupOptionMenuEnum.SCRUMBOARD);
+        adapter = new BacklogItems_Adapter(generateTestData(), getActivity(), PopupOptionMenuEnum.SCRUMBOARD, getView());
 
         recyclerViewToDo.setLayoutManager(layoutManager);
         recyclerViewToDo.setAdapter(adapter);
@@ -66,6 +66,16 @@ public class ToDo_Fragment extends Fragment {
             testDataList.add(new BacklogItem(i, "ToDo_ " + i, "Describtion of ToDo_"+ i, StatusEnum.TODO, user));
         }
         return testDataList;
+    }
+
+    public void addListItem(BacklogItem selectedBacklogItem) {
+        testDataList.add(selectedBacklogItem);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void removeListItem(BacklogItem selectedBacklogItem) {
+        testDataList.remove(selectedBacklogItem);
+        adapter.notifyDataSetChanged();
     }
 
     public interface OnFragmentInteractionListener {
