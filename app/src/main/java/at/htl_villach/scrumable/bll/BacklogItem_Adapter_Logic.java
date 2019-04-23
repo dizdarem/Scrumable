@@ -2,6 +2,7 @@ package at.htl_villach.scrumable.bll;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,15 +13,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import at.htl_villach.scrumable.R;
+import at.htl_villach.scrumable.app.SprintBacklog_Fragment;
 
-public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adapter.BacklogItemViewHolder> {
+public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_Adapter_Logic.BacklogItemViewHolder> implements BacklogItem_Touch_Helper_Adapter {
     private ArrayList<BacklogItem> backlogItemList;
     private Context context;
-    private View view;
-    private PopupOptionMenuEnum popupOptionMenuEnum;
+    private FragmentActivity fragmentActivity;
+    private RecyclerView recyclerView;
+    private Popup_Option_Menu_Enum popupOptionMenuEnum;
     private OnItemClickListener mListener;
+
+    private float previousDx = 0;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -47,9 +53,9 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(listener != null) {
+                    if (listener != null) {
                         int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION) {
+                        if (position != RecyclerView.NO_POSITION) {
                             listener.onItemClick(position);
                         }
                     }
@@ -58,11 +64,12 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
         }
     }
 
-    public BacklogItems_Adapter(ArrayList<BacklogItem> paramBacklogItemlist, Context context, PopupOptionMenuEnum popupOptionMenuEnum, View view) {
+    public BacklogItem_Adapter_Logic(ArrayList<BacklogItem> paramBacklogItemlist, Context context, Popup_Option_Menu_Enum popupOptionMenuEnum, FragmentActivity fragmentActivity, RecyclerView recyclerView) {
         this.backlogItemList = paramBacklogItemlist;
         this.context = context;
         this.popupOptionMenuEnum = popupOptionMenuEnum;
-        this.view = view;
+        this.fragmentActivity = fragmentActivity;
+        this.recyclerView = recyclerView;
     }
 
     @NonNull
@@ -87,13 +94,13 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(context, backlogItemViewHolder.options);
-                if(popupOptionMenuEnum == PopupOptionMenuEnum.PRODUCT_BACKLOG) {
+                if (popupOptionMenuEnum == Popup_Option_Menu_Enum.PRODUCT_BACKLOG) {
                     popupMenu.inflate(R.menu.option_menu_backlog_item_productbacklog);
                     initPopUpMenuProductBacklog(popupMenu, selectedBacklogItem);
-                } else if(popupOptionMenuEnum == PopupOptionMenuEnum.SPRINT_BACKLOG) {
+                } else if (popupOptionMenuEnum == Popup_Option_Menu_Enum.SPRINT_BACKLOG) {
                     popupMenu.inflate(R.menu.option_menu_backlog_item_sprintbacklog);
                     initPopUpMenuSprintBacklog(popupMenu, selectedBacklogItem);
-                } else if(popupOptionMenuEnum == PopupOptionMenuEnum.SCRUMBOARD) {
+                } else if (popupOptionMenuEnum == Popup_Option_Menu_Enum.SCRUMBOARD) {
                     popupMenu.inflate(R.menu.option_menu_backlog_item_scrumboard);
                     initPopUpMenuScrumboard(popupMenu, selectedBacklogItem);
                 }
@@ -107,6 +114,38 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
         return backlogItemList.size();
     }
 
+    @Override
+    public boolean onItemMove(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(backlogItemList, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(backlogItemList, i, i - 1);
+            }
+        }
+
+        notifyItemMoved(fromPosition, toPosition);
+        return true;
+    }
+
+    /*@Override
+    public void onItemDismiss(RecyclerView.ViewHolder viewHolder, int direction) {
+        Toast.makeText(context, String.valueOf(direction), Toast.LENGTH_LONG).show();
+
+        if(viewHolder.getItemViewType() == ItemTouchHelper.LEFT) {
+            Toast.makeText(context, String.valueOf(direction) + "sdfsdfsdf", Toast.LENGTH_LONG).show();
+        }
+
+        if (direction == ItemTouchHelper.LEFT) {    //if swipe left
+            Toast.makeText(context, "Left", Toast.LENGTH_LONG).show();
+
+            TabLayout tabLayout = (TabLayout) fragmentActivity.findViewById(R.id.tablayout);
+            tabLayout.getTabAt(2).select();
+        }
+    }*/
+
     private void initPopUpMenuProductBacklog(final PopupMenu popupMenu, final BacklogItem selectedBacklogItem) {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -117,11 +156,9 @@ public class BacklogItems_Adapter extends RecyclerView.Adapter<BacklogItems_Adap
                         notifyDataSetChanged();
 
                         //ToDo: Move Item to Sprint BL
+                        SprintBacklog_Fragment sprintBacklog_fragment = SprintBacklog_Fragment.newInstance(selectedBacklogItem);
 
-                        //SprintBacklog_Fragment fragment = SprintBacklog_Fragment.newInstance();
-                        //fragment.addListItem(selectedBacklogItem, view);
-
-                        Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Sprint Backlog", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Sprint Backlog", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.item_move_to_Scrumboard:
                         backlogItemList.remove(selectedBacklogItem);

@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +18,15 @@ import java.util.Date;
 
 import at.htl_villach.scrumable.R;
 import at.htl_villach.scrumable.bll.BacklogItem;
-import at.htl_villach.scrumable.bll.BacklogItems_Adapter;
-import at.htl_villach.scrumable.bll.PopupOptionMenuEnum;
+import at.htl_villach.scrumable.bll.BacklogItem_Adapter_DragAndDrop;
+import at.htl_villach.scrumable.bll.BacklogItem_Adapter_Logic;
+import at.htl_villach.scrumable.bll.Popup_Option_Menu_Enum;
 import at.htl_villach.scrumable.bll.StatusEnum;
 import at.htl_villach.scrumable.bll.User;
 
 public class ProductBacklog_Fragment extends Fragment {
     private RecyclerView recyclerViewProductBacklog;
-    private BacklogItems_Adapter adapter;
+    private BacklogItem_Adapter_Logic adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<BacklogItem> testDataList;
 
@@ -39,17 +42,23 @@ public class ProductBacklog_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product_backlog, container, false);
 
+        initControls(view);
+
+        return view;
+    }
+
+    private void initControls(View view) {
         recyclerViewProductBacklog = (RecyclerView)view.findViewById(R.id.recyclerViewProductBacklog);
         testDataList = new ArrayList<>();
 
         recyclerViewProductBacklog.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItems_Adapter(generateTestData(), getActivity(), PopupOptionMenuEnum.PRODUCT_BACKLOG, getView());
+        adapter = new BacklogItem_Adapter_Logic(generateTestData(), getActivity(), Popup_Option_Menu_Enum.PRODUCT_BACKLOG, getActivity(), recyclerViewProductBacklog);
 
         recyclerViewProductBacklog.setLayoutManager(layoutManager);
         recyclerViewProductBacklog.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new BacklogItems_Adapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new BacklogItem_Adapter_Logic.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getContext(), DetailsActivity.class);
@@ -58,7 +67,12 @@ public class ProductBacklog_Fragment extends Fragment {
             }
         });
 
-        return view;
+        RecyclerView.ItemDecoration divider = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        recyclerViewProductBacklog.addItemDecoration(divider);
+
+        ItemTouchHelper.Callback callback = new BacklogItem_Adapter_DragAndDrop(adapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(recyclerViewProductBacklog);
     }
 
     private ArrayList<BacklogItem> generateTestData() {

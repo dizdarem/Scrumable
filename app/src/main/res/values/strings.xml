@@ -28,4 +28,7 @@
     <string name="backlogitem_title">Line1</string>
     <string name="backlogitem_describtion">Line1_2</string>
     <string name="backlogitem_editor">Editor</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
