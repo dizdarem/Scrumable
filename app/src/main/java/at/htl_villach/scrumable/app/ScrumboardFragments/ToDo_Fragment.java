@@ -93,8 +93,15 @@ public class ToDo_Fragment extends Fragment {
                 if (direction == ItemTouchHelper.RIGHT && tabLayout.getSelectedTabPosition() == 0) {    //if swipe left
                     testDataList.remove(position);
                     adapter.notifyDataSetChanged();
-                    Toast.makeText(getContext(), "Right", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Successful shift", Toast.LENGTH_LONG).show();
                     tabLayout.getTabAt(1).select();
+                } else if (direction == ItemTouchHelper.LEFT && tabLayout.getSelectedTabPosition() == 0) {    //if swipe left
+                    BacklogItem backlogItem_toDelete = testDataList.get(position);
+                    testDataList.remove(position);
+                    testDataList.add(position, backlogItem_toDelete);
+                    adapter.notifyDataSetChanged();
+
+                    Toast.makeText(getContext(), "Cannot move to no existing tab", Toast.LENGTH_LONG).show();
                 }
             }
         };

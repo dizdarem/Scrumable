@@ -93,12 +93,12 @@ public class InProcess_Fragment extends Fragment {
                 if (direction == ItemTouchHelper.LEFT && tabLayout.getSelectedTabPosition() == 1) {
                     testDataList.remove(position);
                     adapter.notifyDataSetChanged();
-                    Toast.makeText(getContext(), "Left", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Successful shift", Toast.LENGTH_LONG).show();
                     tabLayout.getTabAt(0).select();
                 } else  if (direction == ItemTouchHelper.RIGHT && tabLayout.getSelectedTabPosition() == 1) {
                     testDataList.remove(position);
                     adapter.notifyDataSetChanged();
-                    Toast.makeText(getContext(), "Right", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Successful shift", Toast.LENGTH_LONG).show();
                     tabLayout.getTabAt(2).select();
                 }
             }
