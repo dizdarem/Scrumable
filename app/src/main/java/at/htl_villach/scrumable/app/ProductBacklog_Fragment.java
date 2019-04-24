@@ -12,6 +12,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -69,6 +70,29 @@ public class ProductBacklog_Fragment extends Fragment {
 
         RecyclerView.ItemDecoration divider = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerViewProductBacklog.addItemDecoration(divider);
+
+        ItemTouchHelper.SimpleCallback helper = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder target, int direction) {
+                int position = target.getAdapterPosition();
+
+                if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
+                    BacklogItem backlogItem_toDelete = testDataList.get(position);
+                    testDataList.remove(position);
+                    testDataList.add(position, backlogItem_toDelete);
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(getContext(), "Cannot move to no existing tab", Toast.LENGTH_LONG).show();
+                }
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(helper);
+        itemTouchHelper.attachToRecyclerView(recyclerViewProductBacklog);
 
         ItemTouchHelper.Callback callback = new BacklogItem_Adapter_DragAndDrop(adapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);

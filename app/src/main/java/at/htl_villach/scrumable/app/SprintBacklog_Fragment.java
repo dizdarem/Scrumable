@@ -63,7 +63,7 @@ public class SprintBacklog_Fragment extends Fragment {
         return view;
     }
 
-    public void init(View view) {
+    public void init(final View view) {
         recyclerViewSprintBacklog = (RecyclerView)view.findViewById(R.id.recyclerViewSprintBacklog);
         testDataList = new ArrayList<>();
 
@@ -86,6 +86,29 @@ public class SprintBacklog_Fragment extends Fragment {
 
         RecyclerView.ItemDecoration divider = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerViewSprintBacklog.addItemDecoration(divider);
+
+        ItemTouchHelper.SimpleCallback helper = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder target, int direction) {
+                int position = target.getAdapterPosition();
+
+                if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
+                    BacklogItem backlogItem_toDelete = testDataList.get(position);
+                    testDataList.remove(position);
+                    testDataList.add(position, backlogItem_toDelete);
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(getContext(), "Cannot move to no existing tab", Toast.LENGTH_LONG).show();
+                }
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(helper);
+        itemTouchHelper.attachToRecyclerView(recyclerViewSprintBacklog);
 
         ItemTouchHelper.Callback callback = new BacklogItem_Adapter_DragAndDrop(adapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
