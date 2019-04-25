@@ -1,33 +1,16 @@
 <resources>
-    <!-- Start -->
     <string name="app_name">Scrumable</string>
     <string name="title_activity_start">Scrumable</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Scrumable</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="title_activity_details">DetailsActivity</string>
-
-    <!-- Main Menu (Left Side) -->
     <string name="mitem_Scrumboard">Scrumboard</string>
     <string name="mitem_Sprint_Backlog">Sprint Backlog</string>
     <string name="mitem_Product_Backlog">Product Backlog</string>
-
-    <!-- Scrumboard Tab Column Tabs -->
-    <string name="tab_Scrumboard_ToDo">ToDo</string>
-    <string name="tab_Scrumboard_InProcess">In Proe</string>
-    <string name="tab_Scrumboard_Testing">Testing</string>
-    <string name="tab_Scrumboard_Done">Done</string>
-
-    <!-- Option Menu (Right Hand Corner) -->
-    <string name="show_profile">Show Profile</string>
+    <string name="show_rofile">Show Profile</string>
     <string name="my_projects">My Projects</string>
     <string name="logout">Logout</string>
-
-    <!-- BacklogItem in ListView -->
-    <string name="backlogitem_title">Line1</string>
-    <string name="backlogitem_describtion">Line1_2</string>
-    <string name="backlogitem_editor">Editor</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
