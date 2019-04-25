@@ -10,7 +10,10 @@ import at.htl_villach.scrumable.app.ScrumboardFragments.Testing_Fragment;
 import at.htl_villach.scrumable.app.ScrumboardFragments.ToDo_Fragment;
 
 public class ScrumboardPagerAdapter extends FragmentStatePagerAdapter {
-
+    /*
+    * Adapter for Scrumboard - Columns
+    * Create Fragment when pressed on specific tab
+    * */
     int nrOfTabs;
 
     public ScrumboardPagerAdapter(FragmentManager fm, int nrOfTabs) {

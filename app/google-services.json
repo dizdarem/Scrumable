@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "667843868680",
+    "firebase_url": "https://scrumable-226fd.firebaseio.com",
+    "project_id": "scrumable-226fd",
+    "storage_bucket": "scrumable-226fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667843868680:android:b59b5e22a7978d0c",
+        "android_client_info": {
+          "package_name": "at.htl_villach.scrumable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667843868680-c5mcvg0bobrmbt95qb16amuegh7s8bi3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "at.htl_villach.scrumable",
+            "certificate_hash": "35d83036aa6a7c708cedc0af6dcf56f72178dd13"
+          }
+        },
+        {
+          "client_id": "667843868680-hq8bsiqcp770ufnm37ms04jhtemiv0l4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7f1NFME4qpYm7MoLszij827EG_jje0rc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667843868680-hq8bsiqcp770ufnm37ms04jhtemiv0l4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

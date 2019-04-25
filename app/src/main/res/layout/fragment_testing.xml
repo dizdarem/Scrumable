@@ -3,13 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ScrumboardFragments.Done_Fragment">
+    tools:context=".app.ScrumboardFragments.Testing_Fragment"
+    android:orientation="horizontal">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fragment Testing"
-        android:layout_centerInParent="true"/>
+    <FrameLayout
+        android:id="@+id/flTesting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewTesting"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:background="@android:color/darker_gray"
+            android:scrollbars="vertical">
+        </android.support.v7.widget.RecyclerView>
+    </FrameLayout>
 
 </RelativeLayout>
