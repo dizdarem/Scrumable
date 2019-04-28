@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,12 +21,13 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        initControls();
+    }
+
+    private void initControls() {
         tv = (TextView)findViewById(R.id.tv);
         imageBtn = (ImageView)findViewById(R.id.imageBtnBack);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
-
-        imageBtn.bringToFront();
-        toolbar.invalidate();
 
         Intent intent = getIntent();
         BacklogItem backlogItem = intent.getParcelableExtra("selectedListItemObj");

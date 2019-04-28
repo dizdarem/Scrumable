@@ -19,10 +19,10 @@ public class ScrumActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrum);
-        initContolls(savedInstanceState);
+        initControls(savedInstanceState);
     }
 
-    private void initContolls(Bundle paramSavedInstanceState) {
+    private void initControls(Bundle paramSavedInstanceState) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

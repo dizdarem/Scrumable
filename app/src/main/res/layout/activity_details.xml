@@ -21,11 +21,12 @@
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/imageBtnBack"
         android:layout_width="75dp"
         android:layout_height="50dp"
-        android:layout_margin="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
         android:translationZ="10dp"
         android:src="@drawable/ic_arrow_back_black_24dp" />
 
