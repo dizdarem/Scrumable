@@ -63,7 +63,7 @@ public class User implements Parcelable, Serializable {
 
     @Override
     public String toString() {
-        return username.toString();
+        return username;
     }
 
     @Override
