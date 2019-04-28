@@ -2,8 +2,11 @@ package at.htl_villach.scrumable.bll;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import at.htl_villach.scrumable.R;
+import at.htl_villach.scrumable.app.ScrumboardFragments.Done_Fragment;
 import at.htl_villach.scrumable.app.SprintBacklog_Fragment;
 
 public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_Adapter_Logic.BacklogItemViewHolder> implements BacklogItem_Touch_Helper_Adapter {
@@ -130,21 +134,10 @@ public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_
         return true;
     }
 
-    /*@Override
+    @Override
     public void onItemDismiss(RecyclerView.ViewHolder viewHolder, int direction) {
-        Toast.makeText(context, String.valueOf(direction), Toast.LENGTH_LONG).show();
 
-        if(viewHolder.getItemViewType() == ItemTouchHelper.LEFT) {
-            Toast.makeText(context, String.valueOf(direction) + "sdfsdfsdf", Toast.LENGTH_LONG).show();
-        }
-
-        if (direction == ItemTouchHelper.LEFT) {    //if swipe left
-            Toast.makeText(context, "Left", Toast.LENGTH_LONG).show();
-
-            TabLayout tabLayout = (TabLayout) fragmentActivity.findViewById(R.id.tablayout);
-            tabLayout.getTabAt(2).select();
-        }
-    }*/
+    }
 
     private void initPopUpMenuProductBacklog(final PopupMenu popupMenu, final BacklogItem selectedBacklogItem) {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

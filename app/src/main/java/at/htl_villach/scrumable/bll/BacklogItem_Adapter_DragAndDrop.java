@@ -1,6 +1,7 @@
 package at.htl_villach.scrumable.bll;
 
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
@@ -35,7 +36,7 @@ public class BacklogItem_Adapter_DragAndDrop extends ItemTouchHelper.Callback {
     }
 
     @Override
-    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-        //adapter.onItemDismiss(viewHolder, viewHolder.getAdapterPosition());
+    public void onSwiped(@NonNull RecyclerView.ViewHolder target, int direction) {
+        adapter.onItemDismiss(target, target.getAdapterPosition());
     }
 }
