@@ -4,6 +4,6 @@
         android:angle="135"
         android:centerColor="#48D1CC"
         android:endColor="#ffffff"
-        android:startColor="#000000"
+        android:startColor="#0f0f0f"
         android:type="linear" />
 </shape>
