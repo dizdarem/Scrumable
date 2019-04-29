@@ -18,6 +18,11 @@
     <string name="backlogitem_describtion">Describtion</string>
     <string name="backlogitem_editor">Editor</string>
     <string name="title_activity_details">Scrumboard</string>
-    <string name="mitem_register">Register</string>
-    <string name="mitem_login">Login</string>
+    <string name="lg_login">Login</string>
+    <string name="lg_username">Username</string>
+    <string name="lg_password">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="rg_register">Register</string>
+    <string name="rg_confirm_password">Confirm Password</string>
+    <string name="rg_birthday">Birthday</string>
 </resources>
