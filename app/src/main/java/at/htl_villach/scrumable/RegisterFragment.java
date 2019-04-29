@@ -21,9 +21,9 @@ public class RegisterFragment extends Fragment {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView()
+        //setContentView()
     }
 
     public RegisterFragment() {

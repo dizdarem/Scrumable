@@ -14,7 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import at.htl_villach.scrumable.LoginFragment;
 import at.htl_villach.scrumable.R;
+import at.htl_villach.scrumable.RegisterFragment;
 
 public class StartActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private Button btnScrumActivity;
@@ -40,8 +42,7 @@ public class StartActivity extends AppCompatActivity implements NavigationView.O
         navigationView.setNavigationItemSelectedListener(this);
 
         if(paramSavedInstanceState == null) {
-            //Successfully logged in --> show on ScrumActivity ScrumboardFragment
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Scrumboard_Fragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoginFragment()).commit();
             navigationView.setCheckedItem(R.id.mitemScrumboard);
         }
     }
@@ -71,12 +72,12 @@ public class StartActivity extends AppCompatActivity implements NavigationView.O
 
         switch (id) {
             case R.id.mitemRegister:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProductBacklog_Fragment()).commit();
-                setTitle(R.string.mitem_Product_Backlog);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoginFragment()).commit();
+                setTitle(R.string.mitem_login);
                 break;
             case R.id.mitemLogin:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SprintBacklog_Fragment()).commit();
-                setTitle(R.string.mitem_Sprint_Backlog);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RegisterFragment()).commit();
+                setTitle(R.string.mitem_register);
                 break;
         }
 
