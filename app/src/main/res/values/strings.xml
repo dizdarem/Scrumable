@@ -18,4 +18,6 @@
     <string name="backlogitem_describtion">Describtion</string>
     <string name="backlogitem_editor">Editor</string>
     <string name="title_activity_details">Scrumboard</string>
+    <string name="mitem_register">Register</string>
+    <string name="mitem_login">Login</string>
 </resources>

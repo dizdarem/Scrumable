@@ -5,20 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/mitemProduct_Backlog"
-            android:icon="@drawable/productbl_icon"
-            android:title="@string/mitem_Product_Backlog" />
+            android:id="@+id/mitemRegister"
+            android:title="@string/mitem_register" />
         <item
-            android:id="@+id/mitemSprint_Backlog"
-            android:icon="@drawable/sprintbl_icon"
-            android:title="@string/mitem_Sprint_Backlog" />
-        <item
-            android:id="@+id/mitemScrumboard"
-            android:icon="@drawable/scrumboard_icon"
-            android:title="@string/mitem_Scrumboard" />
-        <!--<item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />-->
+            android:id="@+id/mitemLogin"
+            android:title="@string/mitem_login" />
     </group>
 </menu>
