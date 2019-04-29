@@ -19,10 +19,10 @@ public class ScrumActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrum);
-        initContolls(savedInstanceState);
+        initControls(savedInstanceState);
     }
 
-    private void initContolls(Bundle paramSavedInstanceState) {
+    private void initControls(Bundle paramSavedInstanceState) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -36,7 +36,7 @@ public class ScrumActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         if(paramSavedInstanceState == null) {
-            //Successfully loged in --> show on ScrumActivity ScrumboardFragment
+            //Successfully logged in --> show on ScrumActivity ScrumboardFragment
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Scrumboard_Fragment()).commit();
             navigationView.setCheckedItem(R.id.mitemScrumboard);
         }
