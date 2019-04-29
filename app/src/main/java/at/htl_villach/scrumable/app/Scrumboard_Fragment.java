@@ -17,11 +17,17 @@ import at.htl_villach.scrumable.app.ScrumboardFragments.Testing_Fragment;
 import at.htl_villach.scrumable.app.ScrumboardFragments.ToDo_Fragment;
 
 public class Scrumboard_Fragment extends Fragment implements ToDo_Fragment.OnFragmentInteractionListener, InProcess_Fragment.OnFragmentInteractionListener, Testing_Fragment.OnFragmentInteractionListener, Done_Fragment.OnFragmentInteractionListener{
+    /*
+    * Scrumboard Fragment which contains toolbar with tabs (Scrumboard - Columns) and their Fragments
+    * Logic of Scrumboard
+    * */
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View x = inflater.inflate(R.layout.fragment_scrumboard, container, false);
-        TabLayout tabLayout = (TabLayout)x.findViewById(R.id.tablayout);
+        View view = inflater.inflate(R.layout.fragment_scrumboard, container, false);
+        TabLayout tabLayout = (TabLayout)view.findViewById(R.id.tablayout);
+        //Scrumboard Tab-Columns
         tabLayout.addTab(tabLayout.newTab().setText("ToDo"));
         tabLayout.addTab(tabLayout.newTab().setText("In Process"));
         tabLayout.addTab(tabLayout.newTab().setText("Testing"));
@@ -29,7 +35,7 @@ public class Scrumboard_Fragment extends Fragment implements ToDo_Fragment.OnFra
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager)x.findViewById(R.id.pager);
+        final ViewPager viewPager = (ViewPager)view.findViewById(R.id.pager);
         final ScrumboardPagerAdapter adapter = new ScrumboardPagerAdapter(getChildFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -51,6 +57,6 @@ public class Scrumboard_Fragment extends Fragment implements ToDo_Fragment.OnFra
             }
         });
 
-        return x;
+        return view;
     }
 }

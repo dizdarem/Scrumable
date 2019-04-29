@@ -5,19 +5,26 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Scrumable</string>
     <string name="nav_header_desc">Navigation header</string>
-
     <string name="mitem_Scrumboard">Scrumboard</string>
     <string name="mitem_Sprint_Backlog">Sprint Backlog</string>
     <string name="mitem_Product_Backlog">Product Backlog</string>
-
-    <string name="tab_Scrumboard_ToDo">ToDo</string>
-    <string name="tab_Scrumboard_InProcess">In Proe</string>
-    <string name="tab_Scrumboard_Testing">Testing</string>
-    <string name="tab_Scrumboard_Done">Done</string>
-
-    <string name="show_profile">Show Profile</string>
+    <string name="show_rofile">Show Profile</string>
     <string name="my_projects">My Projects</string>
     <string name="logout">Logout</string>
 
-    <string name="title_activity_details">DetailsActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="backlogitem_title">Title</string>
+    <string name="backlogitem_describtion">Describtion</string>
+    <string name="backlogitem_editor">Editor</string>
+    <string name="title_activity_details">Scrumboard</string>
+    <string name="lg_login">Login</string>
+    <string name="lg_username">Username</string>
+    <string name="lg_password">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="rg_register">Register</string>
+    <string name="rg_confirm_password">Confirm Password</string>
+    <string name="rg_birthday">Birthday</string>
+    <string name="mitem_login">Login</string>
+    <string name="mitem_register">Register</string>
 </resources>
