@@ -9,7 +9,7 @@
     tools:showIn="@layout/app_bar_scrum">
 
     <FrameLayout
-        android:id="@+id/fragment_container_start"
+        android:id="@+id/fragment_container_scrum"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

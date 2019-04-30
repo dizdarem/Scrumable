@@ -37,7 +37,7 @@ public class ScrumActivity extends AppCompatActivity
 
         if(paramSavedInstanceState == null) {
             //Successfully logged in --> show on ScrumActivity ScrumboardFragment
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Scrumboard_Fragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_scrum, new Scrumboard_Fragment()).commit();
             navigationView.setCheckedItem(R.id.mitemScrumboard);
         }
     }
@@ -90,15 +90,15 @@ public class ScrumActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.mitemProduct_Backlog:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProductBacklog_Fragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_scrum, new ProductBacklog_Fragment()).commit();
                 setTitle(R.string.mitem_Product_Backlog);
                 break;
             case R.id.mitemSprint_Backlog:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SprintBacklog_Fragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_scrum, new SprintBacklog_Fragment()).commit();
                 setTitle(R.string.mitem_Sprint_Backlog);
                 break;
             case R.id.mitemScrumboard:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Scrumboard_Fragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_scrum, new Scrumboard_Fragment()).commit();
                 setTitle(R.string.mitem_Scrumboard);
                 break;
         }

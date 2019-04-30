@@ -115,12 +115,6 @@ public class SprintBacklog_Fragment extends Fragment {
         touchHelper.attachToRecyclerView(recyclerViewSprintBacklog);
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
     private ArrayList<BacklogItem> generateTestData() {
         for(int i=1; i<=5; i++) {
             User user = new User("User_" + i, "User_" + i, new Date());
