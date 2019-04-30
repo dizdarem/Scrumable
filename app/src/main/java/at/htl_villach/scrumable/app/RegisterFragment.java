@@ -1,5 +1,4 @@
-package at.htl_villach.scrumable;
-
+package at.htl_villach.scrumable.app;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -11,12 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import at.htl_villach.scrumable.R;
 import at.htl_villach.scrumable.app.ScrumActivity;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class RegisterFragment extends Fragment {
 
     private static final String TAG = "RegisterFragment";
@@ -36,11 +32,9 @@ public class RegisterFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
         btn_register = (Button)view.findViewById(R.id.btn_register);
@@ -54,5 +48,4 @@ public class RegisterFragment extends Fragment {
 
         return view;
     }
-
 }

@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import at.htl_villach.scrumable.R;
+import at.htl_villach.scrumable.app.ProductBacklog_Fragment;
 import at.htl_villach.scrumable.app.SprintBacklog_Fragment;
+import io.opencensus.trace.SpanId;
 
 public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_Adapter_Logic.BacklogItemViewHolder> implements BacklogItem_Touch_Helper_Adapter {
     private ArrayList<BacklogItem> backlogItemList;
@@ -145,9 +147,8 @@ public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_
                         notifyDataSetChanged();
 
                         //ToDo: Move Item to Sprint BL
-                        SprintBacklog_Fragment sprintBacklog_fragment = SprintBacklog_Fragment.newInstance(selectedBacklogItem);
 
-                        //Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Sprint Backlog", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Sprint Backlog", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.item_move_to_Scrumboard:
                         backlogItemList.remove(selectedBacklogItem);
@@ -174,7 +175,9 @@ public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_
                         backlogItemList.remove(selectedBacklogItem);
                         notifyDataSetChanged();
 
-                        //ToDo: Move Item to Product BL
+                        //ToDo: Move Item to Product B
+
+                        ProductBacklog_Fragment fragment = ProductBacklog_Fragment.newInstance();
 
                         Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Product Backlog", Toast.LENGTH_LONG).show();
                         break;
