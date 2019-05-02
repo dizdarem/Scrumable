@@ -102,13 +102,18 @@ public class ProductBacklog_Fragment extends Fragment {
     private ArrayList<BacklogItem> generateTestData() {
         for(int i=1; i<=5; i++) {
             User user = new User("User_" + i, "User_" + i, new Date());
-            testDataList.add(new BacklogItem(i, "Product_Backlog_ " + i, "Describtion of Prodcut_Backlog_"+ i, StatusEnum.PRODUCT_BACKLOG, user));
+            testDataList.add(new BacklogItem(i, "Product_BL_ " + i, "Describtion of Product BL"+ i, StatusEnum.PRODUCT_BL, user));
         }
         return testDataList;
     }
 
     public void addListItem(BacklogItem selectedBacklogItem) {
         testDataList.add(selectedBacklogItem);
+        adapter.notifyDataSetChanged();
+    }
+
+    public  void updateListItem(BacklogItem selectedBacklogItem) {
+        testDataList.add(selectedBacklogItem.getId(),selectedBacklogItem);
         adapter.notifyDataSetChanged();
     }
 

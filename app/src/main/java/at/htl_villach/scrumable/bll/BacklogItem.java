@@ -11,7 +11,7 @@ public class BacklogItem implements Parcelable {
     private int id;
     private String title;
     private String describtion;
-    private StatusEnum status = StatusEnum.PRODUCT_BACKLOG; //default: in Product backlog
+    private StatusEnum status = StatusEnum.PRODUCT_BL; //default: in Product backlog
     private User editor;
 
     public BacklogItem(int id, String title, String describtion, StatusEnum status, User editor) {

@@ -118,7 +118,7 @@ public class SprintBacklog_Fragment extends Fragment {
     private ArrayList<BacklogItem> generateTestData() {
         for(int i=1; i<=5; i++) {
             User user = new User("User_" + i, "User_" + i, new Date());
-            testDataList.add(new BacklogItem(i, "Sprint_Backlog_ " + i, "Describtion of Sprint_Backlog_"+ i, StatusEnum.SPRINT_BACKLOG, user));
+            testDataList.add(new BacklogItem(i, "Sprint_BL_ " + i, "Describtion of Sprint_BL_"+ i, StatusEnum.SPRINT_BL, user));
         }
         return testDataList;
     }
