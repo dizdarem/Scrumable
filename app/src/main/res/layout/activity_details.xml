@@ -12,19 +12,6 @@
         android:background="@color/colorPrimary"
         android:elevation="4dp"></android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="13dp"
-        android:paddingRight="8dp"
-        android:text="&#8942;"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:translationZ="10dp" />
-
     <ImageView
         android:id="@+id/imageBtnBack"
         android:layout_width="75dp"

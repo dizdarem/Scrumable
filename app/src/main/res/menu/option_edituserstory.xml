@@ -2,9 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/editUserStory"
+        android:id="@+id/mitem_EditUserStory"
         android:orderInCategory="100"
         android:title="Edit Userstory"
+        android:theme = "@style/AppTheme.NoActionBar"
         app:showAsAction="never" />
 
 </menu>
