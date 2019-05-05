@@ -1,8 +1,8 @@
 package at.htl_villach.scrumable.bll;
 
 public enum StatusEnum {
-    PRODUCT_BACKLOG,
-    SPRINT_BACKLOG,
+    PRODUCT_BL,
+    SPRINT_BL,
     TODO,
     IN_PROCESS,
     TESTING,
