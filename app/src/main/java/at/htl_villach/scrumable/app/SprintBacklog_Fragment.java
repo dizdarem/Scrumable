@@ -28,8 +28,6 @@ import at.htl_villach.scrumable.bll.User;
 public class SprintBacklog_Fragment extends Fragment {
     private static final String BACKLOG_ITEM = "backlogItem";
 
-    private BacklogItem backlogItem;
-
     private RecyclerView recyclerViewSprintBacklog;
     private BacklogItem_Adapter_Logic adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -51,16 +49,26 @@ public class SprintBacklog_Fragment extends Fragment {
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sprint_backlog, container, false);
 
-        if (savedInstanceState != null) {
-            backlogItem = savedInstanceState.getParcelable(BACKLOG_ITEM);
-            Toast.makeText(getContext(), backlogItem.toString(), Toast.LENGTH_LONG).show();
+        /*if (savedInstanceState != null) {
+            BacklogItem backlogItem_ToAdd = savedInstanceState.getParcelable(BACKLOG_ITEM);
+            Toast.makeText(getContext(), backlogItem_ToAdd.toString(), Toast.LENGTH_LONG).show();
 
-            //addListItem(data);
-        }
+            addListItem(backlogItem_ToAdd);
+        }*/
 
-        init(view);
+        //Toast.makeText(getContext(), "First time", Toast.LENGTH_LONG).show();
+
+        if(savedInstanceState==null)
+            init(view);
 
         return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Toast.makeText(getContext(), "Second time", Toast.LENGTH_LONG).show();
     }
 
     public void init(final View view) {
@@ -125,7 +133,6 @@ public class SprintBacklog_Fragment extends Fragment {
 
     public void addListItem(BacklogItem selectedBacklogItem) {
         testDataList.add(selectedBacklogItem);
-        notifyAll();
         adapter.notifyDataSetChanged();
     }
 
