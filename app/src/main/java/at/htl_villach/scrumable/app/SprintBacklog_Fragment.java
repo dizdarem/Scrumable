@@ -67,8 +67,6 @@ public class SprintBacklog_Fragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Toast.makeText(getContext(), "Second time", Toast.LENGTH_LONG).show();
     }
 
     public void init(final View view) {

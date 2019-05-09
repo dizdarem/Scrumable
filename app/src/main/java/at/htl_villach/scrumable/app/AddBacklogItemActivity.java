@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import at.htl_villach.scrumable.R;
+import at.htl_villach.scrumable.bll.StatusEnum;
 import at.htl_villach.scrumable.bll.User;
 
 public class AddBacklogItemActivity extends AppCompatActivity {
@@ -45,6 +46,7 @@ public class AddBacklogItemActivity extends AppCompatActivity {
         btnSave = (Button) findViewById(R.id.btnSaveAdd);
         setSupportActionBar(toolbar);
         fillComboboxEditor();
+        fillComboboxStatus();
 
         imageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,51 +76,19 @@ public class AddBacklogItemActivity extends AppCompatActivity {
     private void fillComboboxEditor() {
         List<User> list = new ArrayList<>();
         list.add(new User("User_2", "test", new Date()));
+        list.add(new User("User_3", "test", new Date()));
+        list.add(new User("User_4", "test", new Date()));
         //ToDo: Get Users form Database
 
         cbEditor.setAdapter(new ArrayAdapter<User>(AddBacklogItemActivity.this, android.R.layout.simple_list_item_1, list));
     }
 
-   /* private void fillComboboxStatus() {
+   private void fillComboboxStatus() {
         List<StatusEnum> list = new ArrayList<StatusEnum>();
-        StatusEnum curStatus = backlogItem.getStatus();
-        list.add(curStatus);
-        switch (curStatus) {
-            case PRODUCT_BL:
-                list.add(StatusEnum.SPRINT_BL);
-                list.add(StatusEnum.DONE);
-                break;
-            case SPRINT_BL:
-                list.add(StatusEnum.PRODUCT_BL);
-                list.add(StatusEnum.DONE);
-                break;
-            case TODO:
-                list.add(StatusEnum.PRODUCT_BL);
-                list.add(StatusEnum.SPRINT_BL);
-                list.add(StatusEnum.IN_PROCESS);
-                break;
-            case IN_PROCESS:
-                list.add(StatusEnum.PRODUCT_BL);
-                list.add(StatusEnum.SPRINT_BL);
-                list.add(StatusEnum.TODO);
-                list.add(StatusEnum.TESTING);
-                break;
-            case TESTING:
-                list.add(StatusEnum.PRODUCT_BL);
-                list.add(StatusEnum.SPRINT_BL);
-                list.add(StatusEnum.IN_PROCESS);
-                list.add(StatusEnum.DONE);
-                break;
-            case DONE:
-                list.add(StatusEnum.PRODUCT_BL);
-                list.add(StatusEnum.SPRINT_BL);
-                list.add(StatusEnum.TESTING);
-                break;
-            default:
-                break;
-        }
-
+        list.add(StatusEnum.PRODUCT_BL);
+        list.add(StatusEnum.SPRINT_BL);
+        list.add(StatusEnum.TODO);
         cbStatus.setAdapter(new ArrayAdapter<StatusEnum>(AddBacklogItemActivity.this, android.R.layout.simple_list_item_1, list));
-    }*/
+    }
 }
 

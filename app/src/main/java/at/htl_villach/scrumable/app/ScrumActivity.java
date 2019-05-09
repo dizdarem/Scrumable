@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import at.htl_villach.scrumable.R;
 
@@ -76,7 +77,8 @@ public class ScrumActivity extends AppCompatActivity
                 //toDo: open new Intent
                 break;
             case R.id.logout:
-                //toDo: Open Dialog to Logout
+                Intent myIntent = new Intent(ScrumActivity.this, StartActivity.class);
+                ScrumActivity.this.startActivity(myIntent);
                 break;
         }
 
