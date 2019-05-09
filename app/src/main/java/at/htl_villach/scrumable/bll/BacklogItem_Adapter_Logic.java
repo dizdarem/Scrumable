@@ -17,8 +17,6 @@ import java.util.Collections;
 
 import at.htl_villach.scrumable.R;
 import at.htl_villach.scrumable.app.ProductBacklog_Fragment;
-import at.htl_villach.scrumable.app.SprintBacklog_Fragment;
-import io.opencensus.trace.SpanId;
 
 public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_Adapter_Logic.BacklogItemViewHolder> implements BacklogItem_Touch_Helper_Adapter {
     private ArrayList<BacklogItem> backlogItemList;

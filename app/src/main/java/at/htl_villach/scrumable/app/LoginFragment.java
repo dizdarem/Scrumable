@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import at.htl_villach.scrumable.R;
-import at.htl_villach.scrumable.app.ScrumActivity;
 
 public class LoginFragment extends Fragment {
     private Button btn_login;

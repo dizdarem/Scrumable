@@ -3,7 +3,6 @@ package at.htl_villach.scrumable.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -160,6 +158,7 @@ public class DetailsActivity extends AppCompatActivity {
                     BacklogItem editedbacklogItem = new BacklogItem(backlogItem.getId(), etTitle.getText().toString(), etDescription.getText().toString(), (StatusEnum) cbStatus.getSelectedItem(), (User) cbEditor.getSelectedItem());
                     intent.putExtra("selectedListItemObj", editedbacklogItem);
                     startActivity(intent);
+                    Toast.makeText(DetailsActivity.this, "Successful Update", Toast.LENGTH_LONG).show();
                 }
             });
         }
