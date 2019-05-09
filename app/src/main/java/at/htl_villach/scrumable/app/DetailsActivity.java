@@ -8,23 +8,31 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import at.htl_villach.scrumable.R;
 import at.htl_villach.scrumable.bll.BacklogItem;
 import at.htl_villach.scrumable.bll.StatusEnum;
+import at.htl_villach.scrumable.bll.User;
 
 public class DetailsActivity extends AppCompatActivity {
     private EditText etTitle;
-    private EditText etEditor;
-    private EditText etStatus;
+    private Spinner cbEditor;
+    private Spinner cbStatus;
     private EditText etDescription;
     private ImageView imageBtn;
     private Toolbar toolbar;
+    private BacklogItem backlogItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,19 +45,23 @@ public class DetailsActivity extends AppCompatActivity {
 
     private void initControls() {
         etTitle = (EditText)findViewById(R.id.etTitle);
-        etEditor = (EditText)findViewById(R.id.etEditor);
-        etStatus = (EditText)findViewById(R.id.etStatus);
+        cbEditor = (Spinner)findViewById(R.id.cbEditor);
+        cbStatus = (Spinner) findViewById(R.id.cbStatus);
         etDescription = (EditText)findViewById(R.id.etDescription);
         imageBtn = (ImageView)findViewById(R.id.imageBtnBack);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
-        BacklogItem backlogItem = intent.getParcelableExtra("selectedListItemObj");
+        backlogItem = intent.getParcelableExtra("selectedListItemObj");
 
         etTitle.setText(backlogItem.getTitle());
-        etEditor.setText(backlogItem.getEditor().toString());
-        etStatus.setText(backlogItem.getStatus().toString());
+        fillComboboxEditor();
+        fillComboboxStatus();
+
+        cbEditor.setEnabled(false);
+        cbStatus.setEnabled(false);
+
         etDescription.setText(backlogItem.getDescribtion());
 
         imageBtn.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +70,58 @@ public class DetailsActivity extends AppCompatActivity {
                 DetailsActivity.this.finish();
             }
         });
+    }
+
+    private void fillComboboxEditor() {
+        List<User> list = new ArrayList<>();
+        User curEditor = backlogItem.getEditor();
+        list.add(curEditor);
+        list.add(new User("User_2", "test", new Date()));
+        //ToDo: Get Users form Database
+
+        cbEditor.setAdapter(new ArrayAdapter<User>(DetailsActivity.this, android.R.layout.simple_list_item_1, list));
+    }
+
+    private void fillComboboxStatus() {
+        List<StatusEnum> list = new ArrayList<StatusEnum>();
+        StatusEnum curStatus = backlogItem.getStatus();
+        list.add(curStatus);
+        switch (curStatus) {
+            case PRODUCT_BL:
+                list.add(StatusEnum.SPRINT_BL);
+                list.add(StatusEnum.DONE);
+                break;
+            case SPRINT_BL:
+                list.add(StatusEnum.PRODUCT_BL);
+                list.add(StatusEnum.DONE);
+                break;
+            case TODO:
+                list.add(StatusEnum.PRODUCT_BL);
+                list.add(StatusEnum.SPRINT_BL);
+                list.add(StatusEnum.IN_PROCESS);
+                break;
+            case IN_PROCESS:
+                list.add(StatusEnum.PRODUCT_BL);
+                list.add(StatusEnum.SPRINT_BL);
+                list.add(StatusEnum.TODO);
+                list.add(StatusEnum.TESTING);
+                break;
+            case TESTING:
+                list.add(StatusEnum.PRODUCT_BL);
+                list.add(StatusEnum.SPRINT_BL);
+                list.add(StatusEnum.IN_PROCESS);
+                list.add(StatusEnum.DONE);
+                break;
+            case DONE:
+                list.add(StatusEnum.PRODUCT_BL);
+                list.add(StatusEnum.SPRINT_BL);
+                list.add(StatusEnum.TESTING);
+                break;
+                default:
+                    break;
+        }
+
+        cbStatus.setAdapter(new ArrayAdapter<StatusEnum>(DetailsActivity.this, android.R.layout.simple_list_item_1, list));
     }
 
     @Override
@@ -72,8 +136,8 @@ public class DetailsActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.mitem_EditUserStory) {
             etTitle = (EditText) findViewById(R.id.etTitle);
-            etEditor = (EditText) findViewById(R.id.etEditor);
-            etStatus = (EditText) findViewById(R.id.etStatus);
+            cbEditor = (Spinner) findViewById(R.id.cbEditor);
+            cbStatus = (Spinner) findViewById(R.id.cbStatus);
             etDescription = (EditText) findViewById(R.id.etDescription);
             Button btnSave = (Button) findViewById(R.id.btnSave);
             btnSave.setEnabled(true);
@@ -82,13 +146,8 @@ public class DetailsActivity extends AppCompatActivity {
             etTitle.setFocusable(true);
             etTitle.setFocusableInTouchMode(true);
 
-            etEditor.setClickable(true);
-            etEditor.setFocusable(true);
-            etEditor.setFocusableInTouchMode(true);
-
-            etStatus.setClickable(true);
-            etStatus.setFocusable(true);
-            etStatus.setFocusableInTouchMode(true);
+            cbStatus.setEnabled(true);
+            cbEditor.setEnabled(true);
 
             etDescription.setClickable(true);
             etDescription.setFocusable(true);
@@ -97,8 +156,11 @@ public class DetailsActivity extends AppCompatActivity {
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(etStatus.getText().equals(StatusEnum.PRODUCT_BL)) {
-                    }
+                    DetailsActivity.this.finish();
+                    Intent intent = new Intent(DetailsActivity.this, DetailsActivity.class);
+                    BacklogItem editedbacklogItem = new BacklogItem(backlogItem.getId(), etTitle.getText().toString(), etDescription.getText().toString(), (StatusEnum) cbStatus.getSelectedItem(), (User) cbEditor.getSelectedItem());
+                    intent.putExtra("selectedListItemObj", editedbacklogItem);
+                    startActivity(intent);
                 }
             });
         }

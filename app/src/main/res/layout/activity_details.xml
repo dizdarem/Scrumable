@@ -81,8 +81,8 @@
         android:paddingLeft="20dp"
         android:text="EDITOR:" />
 
-    <EditText
-        android:id="@+id/etStatus"
+    <Spinner
+        android:id="@+id/cbStatus"
         android:layout_width="160dp"
         android:layout_height="30dp"
         android:layout_alignParentTop="true"
@@ -92,12 +92,12 @@
         android:layout_marginEnd="40dp"
         android:background="@drawable/round_button"
         android:clickable="false"
+        android:focusable="false"
         android:paddingLeft="20dp"
-        android:focusableInTouchMode="false"
-        android:focusable="false"></EditText>
+        android:focusableInTouchMode="false"></Spinner>
 
-    <EditText
-        android:id="@+id/etEditor"
+    <Spinner
+        android:id="@+id/cbEditor"
         android:layout_width="160dp"
         android:layout_height="30dp"
         android:layout_alignParentTop="true"
@@ -107,9 +107,9 @@
         android:layout_marginEnd="40dp"
         android:background="@drawable/round_button"
         android:clickable="false"
-        android:focusableInTouchMode="false"
         android:focusable="false"
-        android:paddingLeft="20dp"></EditText>
+        android:focusableInTouchMode="false"
+        android:paddingLeft="20dp"></Spinner>
 
     <EditText
         android:id="@+id/etDescription"
