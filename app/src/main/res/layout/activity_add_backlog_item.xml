@@ -1,10 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.AddBacklogItemActivity">
-    <include  layout="@layout/activity_details"/>
+    tools:context=".app.DetailsActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarAdd"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"></android.support.v7.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/imageBtnBackAdd"
+        android:layout_width="75dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:translationZ="10dp"
+        android:src="@drawable/whitearrow_icon" />
+
+    <EditText
+        android:id="@+id/etTitleAdd"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/round_button"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:paddingLeft="20dp">
+        <requestFocus></requestFocus>
+    </EditText>
+
+
+    <EditText
+        android:id="@+id/lblStatus"
+        android:layout_width="105dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/round_button"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:focusable="false"
+        android:paddingLeft="20dp"
+        android:text="STATUS:" />
+
+    <EditText
+        android:id="@+id/lblTitle"
+        android:layout_width="105dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/round_button"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:focusable="false"
+        android:paddingLeft="30dp"
+        android:text="TITLE:" />
+
+    <EditText
+        android:id="@+id/lblEditor"
+        android:layout_width="105dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="170dp"
+        android:background="@drawable/round_button"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:focusable="false"
+        android:paddingLeft="20dp"
+        android:text="EDITOR:" />
+
+    <Spinner
+        android:id="@+id/cbStatusAdd"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/round_button"
+        android:paddingLeft="20dp"></Spinner>
+
+    <Spinner
+        android:id="@+id/cbEditorAdd"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/round_button"
+        android:paddingLeft="20dp"></Spinner>
+
+    <EditText
+        android:id="@+id/etDescriptionAdd"
+        android:layout_width="369dp"
+        android:layout_height="313dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/round_button"
+        android:backgroundTint="@color/colorPrimary"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:focusable="false"
+        android:inputType="textMultiLine"
+        android:textAlignment="center"
+        android:hint="Description"/>
+
+    <Button
+        android:id="@+id/btnSaveAdd"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="216dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="133dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/round_button"
+        android:text="Save"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
 </RelativeLayout>

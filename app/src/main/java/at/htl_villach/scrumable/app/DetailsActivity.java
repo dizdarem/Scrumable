@@ -156,8 +156,7 @@ public class DetailsActivity extends AppCompatActivity {
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DetailsActivity.this.finish();
-                    Intent intent = new Intent(DetailsActivity.this, DetailsActivity.class);
+                    Intent intent = new Intent(DetailsActivity.this, ScrumActivity.class);
                     BacklogItem editedbacklogItem = new BacklogItem(backlogItem.getId(), etTitle.getText().toString(), etDescription.getText().toString(), (StatusEnum) cbStatus.getSelectedItem(), (User) cbEditor.getSelectedItem());
                     intent.putExtra("selectedListItemObj", editedbacklogItem);
                     startActivity(intent);

@@ -26,7 +26,7 @@
             android:id="@+id/describtion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/backlogitem_describtion"
+            android:text="@string/backlogitem_description"
             android:textSize="15dp"
             android:layout_below="@+id/title"
             android:layout_marginStart="10dp" />

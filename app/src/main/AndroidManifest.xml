@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".app.AddBacklogItemActivity"></activity>
+        <activity android:name=".app.AddBacklogItemActivity" android:label="Add US"></activity>
         <activity
             android:name=".app.DetailsActivity"
             android:label="@string/title_activity_details" />

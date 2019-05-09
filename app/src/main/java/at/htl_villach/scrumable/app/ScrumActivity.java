@@ -104,7 +104,7 @@ public class ScrumActivity extends AppCompatActivity
                 setTitle(R.string.mitem_Scrumboard);
                 break;
             case R.id.mitemAddUS:
-                Intent myIntent = new Intent(ScrumActivity.this, DetailsActivity.class);
+                Intent myIntent = new Intent(ScrumActivity.this, AddBacklogItemActivity.class);
                 ScrumActivity.this.startActivity(myIntent);
                 setTitle(R.string.addUS);
                 break;
