@@ -28,4 +28,12 @@
     <string name="rg_birthday">dd.mm.yyyy</string>
     <string name="mitem_login">Login</string>
     <string name="mitem_register">Register</string>
+    <string name="usernameCorrect">Username is correct</string>
+    <string name="usernameNotCorrect">Username is not correct</string>
+    <string name="dateCorrect">Date is correct</string>
+    <string name="dateNotCorrect">Date is not correct</string>
+    <string name="passwordCorrect">Password is correct</string>
+    <string name="passwordNotCorrect">Password is not correct</string>
+    <string name="confPasswordCorrect">Confirm Password is not correct</string>
+    <string name="confPasswordNotCorrect">Conf Password is correct</string>
 </resources>

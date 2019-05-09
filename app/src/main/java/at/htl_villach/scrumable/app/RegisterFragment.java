@@ -19,12 +19,10 @@ public class RegisterFragment extends Fragment {
     private Pattern usernamePattern;
     private Pattern birthdayPattern;
     private Pattern passwordPattern;
-    private Pattern confPasswordPattern;
 
     private Matcher usernameMatcher;
     private Matcher birthdayMatcher;
     private Matcher passwordMatcher;
-    private Matcher confPasswordMatcher;
 
     private static final String USERNAME_PATTERN = "(^[A-Z]\\w{5,})";
     private static final String DATE_PATTERN = "(0?[1-9]|[12][0-9]|3[01]).(0?[1-9]|1[012]).((19|20)\\d\\d)";
@@ -93,24 +91,24 @@ public class RegisterFragment extends Fragment {
 
 
             if (usernameMatcher.matches()) {
-                tvDebugUsername.setText("Username is correct");
+                tvDebugUsername.setText(getString(R.string.usernameCorrect));
             } else {
-                tvDebugUsername.setText("Username is not correct");
+                tvDebugUsername.setText(getString(R.string.usernameNotCorrect));
             }
             if (birthdayMatcher.matches()) {
-                tvDebugBirthday.setText("Date is correct");
+                tvDebugBirthday.setText(getString(R.string.dateCorrect));
             } else {
-                tvDebugBirthday.setText("Date is not correct");
+                tvDebugBirthday.setText(getString(R.string.dateNotCorrect));
             }
             if (passwordMatcher.matches()) {
-                tvDebugPassword.setText("Password is correct");
+                tvDebugPassword.setText(getString(R.string.passwordCorrect));
             } else {
-                tvDebugPassword.setText("Password is not correct");
+                tvDebugPassword.setText(getString(R.string.passwordNotCorrect));
             }
             if (etPassword.getText().toString() == etConPassword.getText().toString()) {
-                tvDebugConfPassword.setText("Confirm Password is not correct");
+                tvDebugConfPassword.setText(getString(R.string.confPasswordCorrect));
             }else{
-                tvDebugConfPassword.setText("Conf Password is correct");
+                tvDebugConfPassword.setText(getString(R.string.confPasswordNotCorrect));
             }
         }
     };
