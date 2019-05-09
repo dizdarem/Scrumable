@@ -1,5 +1,6 @@
 package at.htl_villach.scrumable.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -101,6 +102,11 @@ public class ScrumActivity extends AppCompatActivity
             case R.id.mitemScrumboard:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_scrum, new Scrumboard_Fragment()).commit();
                 setTitle(R.string.mitem_Scrumboard);
+                break;
+            case R.id.mitemAddUS:
+                Intent myIntent = new Intent(ScrumActivity.this, DetailsActivity.class);
+                ScrumActivity.this.startActivity(myIntent);
+                setTitle(R.string.addUS);
                 break;
         }
 

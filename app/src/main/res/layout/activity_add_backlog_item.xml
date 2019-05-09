@@ -5,21 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".app.AddBacklogItemActivity">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:elevation="4dp"></android.support.v7.widget.Toolbar>
-
-    <ImageView
-        android:id="@+id/imageBtnBack"
-        android:layout_width="75dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
-        android:translationZ="10dp"
-        android:src="@drawable/whitearrow_icon" />
+    <include  layout="@layout/activity_details"/>
 
 </RelativeLayout>

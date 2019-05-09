@@ -6,6 +6,7 @@
     <string name="nav_header_title">Scrumable</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="mitem_Scrumboard">Scrumboard</string>
+    <string name="addUS">Add UserStory</string>
     <string name="mitem_Sprint_Backlog">Sprint Backlog</string>
     <string name="mitem_Product_Backlog">Product Backlog</string>
     <string name="show_rofile">Show Profile</string>

@@ -16,6 +16,10 @@
             android:id="@+id/mitemScrumboard"
             android:icon="@drawable/scrumboard_icon"
             android:title="@string/mitem_Scrumboard" />
+        <item
+            android:id="@+id/mitemAddUS"
+            android:icon="@drawable/adduserstory_icon"
+            android:title="Add User Story" />
         <!--<item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
