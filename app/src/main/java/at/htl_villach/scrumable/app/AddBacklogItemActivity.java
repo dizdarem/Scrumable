@@ -1,8 +1,8 @@
 package at.htl_villach.scrumable.app;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -12,12 +12,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import at.htl_villach.scrumable.R;
 import at.htl_villach.scrumable.bll.StatusEnum;
 import at.htl_villach.scrumable.bll.User;
+import at.htl_villach.scrumable.dal.DatabaseManager;
 
 public class AddBacklogItemActivity extends AppCompatActivity {
     private EditText etTitle;
@@ -28,6 +28,8 @@ public class AddBacklogItemActivity extends AppCompatActivity {
     private Button btnSave;
     private Toolbar toolbar;
 
+    private DatabaseManager databaseManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +38,10 @@ public class AddBacklogItemActivity extends AppCompatActivity {
 
         initControls();
     }
+
     private void initControls() {
+        databaseManager = new DatabaseManager(AddBacklogItemActivity.this);
+        databaseManager.open();
         etTitle = (EditText)findViewById(R.id.etTitleAdd);
         cbEditor = (Spinner)findViewById(R.id.cbEditorAdd);
         cbStatus = (Spinner)findViewById(R.id.cbStatusAdd);
@@ -74,12 +79,7 @@ public class AddBacklogItemActivity extends AppCompatActivity {
     }
 
     private void fillComboboxEditor() {
-        List<User> list = new ArrayList<>();
-        list.add(new User("User_2", "test", new Date()));
-        list.add(new User("User_3", "test", new Date()));
-        list.add(new User("User_4", "test", new Date()));
-        //ToDo: Get Users form Database
-
+        List<User> list = databaseManager.fetch_Users(null);
         cbEditor.setAdapter(new ArrayAdapter<User>(AddBacklogItemActivity.this, android.R.layout.simple_list_item_1, list));
     }
 

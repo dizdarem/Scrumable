@@ -13,12 +13,9 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import at.htl_villach.scrumable.R;
 import at.htl_villach.scrumable.bll.BacklogItem;
@@ -26,7 +23,6 @@ import at.htl_villach.scrumable.bll.BacklogItem_Adapter_DragAndDrop;
 import at.htl_villach.scrumable.bll.BacklogItem_Adapter_Logic;
 import at.htl_villach.scrumable.bll.Popup_Option_Menu_Enum;
 import at.htl_villach.scrumable.bll.StatusEnum;
-import at.htl_villach.scrumable.bll.User;
 import at.htl_villach.scrumable.dal.DatabaseManager;
 
 public class ProductBacklog_Fragment extends Fragment {

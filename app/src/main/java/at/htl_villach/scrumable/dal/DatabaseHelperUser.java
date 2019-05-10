@@ -13,7 +13,7 @@ public class DatabaseHelperUser extends SQLiteOpenHelper {
     static final String DATE = "date";
 
     private static final String DB_NAME = "HTL_VILLACH_SCRUMABLE_USERS.DB";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     private static final String CREATE_TABLE_CONCERT = "create table "+TABLE_NAME+" ( "+USERNAME
             + " TEXT NOT NULL UNIQUE, " + PASSWORD + " TEXT NOT NULL, " + DATE + " TEXT NOT NULL); ";

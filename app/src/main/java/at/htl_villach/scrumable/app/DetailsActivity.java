@@ -15,13 +15,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import at.htl_villach.scrumable.R;
 import at.htl_villach.scrumable.bll.BacklogItem;
 import at.htl_villach.scrumable.bll.StatusEnum;
 import at.htl_villach.scrumable.bll.User;
+import at.htl_villach.scrumable.dal.DatabaseManager;
 
 public class DetailsActivity extends AppCompatActivity {
     private EditText etTitle;
@@ -31,6 +31,8 @@ public class DetailsActivity extends AppCompatActivity {
     private ImageView imageBtn;
     private Toolbar toolbar;
     private BacklogItem backlogItem;
+
+    private DatabaseManager databaseManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void initControls() {
+        databaseManager = new DatabaseManager(DetailsActivity.this);
+        databaseManager.open();
         etTitle = (EditText)findViewById(R.id.etTitle);
         cbEditor = (Spinner)findViewById(R.id.cbEditor);
         cbStatus = (Spinner) findViewById(R.id.cbStatus);
@@ -71,11 +75,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void fillComboboxEditor() {
-        List<User> list = new ArrayList<>();
-        User curEditor = backlogItem.getEditor();
-        list.add(curEditor);
-        list.add(new User("User_2", "test", new Date()));
-        //ToDo: Get Users form Database
+        List<User> list = databaseManager.fetch_Users(null);
 
         cbEditor.setAdapter(new ArrayAdapter<User>(DetailsActivity.this, android.R.layout.simple_list_item_1, list));
     }
