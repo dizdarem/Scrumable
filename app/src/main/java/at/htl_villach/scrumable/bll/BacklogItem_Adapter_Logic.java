@@ -17,16 +17,15 @@ import java.util.Collections;
 
 import at.htl_villach.scrumable.R;
 import at.htl_villach.scrumable.app.ProductBacklog_Fragment;
+import at.htl_villach.scrumable.dal.DatabaseManager;
 
 public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_Adapter_Logic.BacklogItemViewHolder> implements BacklogItem_Touch_Helper_Adapter {
     private ArrayList<BacklogItem> backlogItemList;
     private Context context;
-    private FragmentActivity fragmentActivity;
-    private RecyclerView recyclerView;
     private Popup_Option_Menu_Enum popupOptionMenuEnum;
     private OnItemClickListener mListener;
 
-    private float previousDx = 0;
+    private DatabaseManager databaseManager;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -37,7 +36,6 @@ public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_
     }
 
     public static class BacklogItemViewHolder extends RecyclerView.ViewHolder {
-
         public TextView title;
         public TextView describtion;
         public TextView editor;
@@ -64,12 +62,12 @@ public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_
         }
     }
 
-    public BacklogItem_Adapter_Logic(ArrayList<BacklogItem> paramBacklogItemlist, Context context, Popup_Option_Menu_Enum popupOptionMenuEnum, FragmentActivity fragmentActivity, RecyclerView recyclerView) {
+    public BacklogItem_Adapter_Logic(ArrayList<BacklogItem> paramBacklogItemlist, Context context, Popup_Option_Menu_Enum popupOptionMenuEnum) {
         this.backlogItemList = paramBacklogItemlist;
         this.context = context;
         this.popupOptionMenuEnum = popupOptionMenuEnum;
-        this.fragmentActivity = fragmentActivity;
-        this.recyclerView = recyclerView;
+        databaseManager = new DatabaseManager(context);
+        databaseManager.open();
     }
 
     @NonNull
@@ -144,7 +142,8 @@ public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_
                         backlogItemList.remove(selectedBacklogItem);
                         notifyDataSetChanged();
 
-                        //ToDo: Move Item to Sprint BL
+                        selectedBacklogItem.setStatus(StatusEnum.SPRINT_BL);
+                        databaseManager.update_BacklogItem(selectedBacklogItem);
 
                         Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Sprint Backlog", Toast.LENGTH_LONG).show();
                         break;
@@ -152,7 +151,8 @@ public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_
                         backlogItemList.remove(selectedBacklogItem);
                         notifyDataSetChanged();
 
-                        //ToDo: Move Item to Scrumboard - Column ToDo
+                        selectedBacklogItem.setStatus(StatusEnum.TODO);
+                        databaseManager.update_BacklogItem(selectedBacklogItem);
 
                         Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Scrumboard", Toast.LENGTH_LONG).show();
                         break;
@@ -173,7 +173,8 @@ public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_
                         backlogItemList.remove(selectedBacklogItem);
                         notifyDataSetChanged();
 
-                        //ToDo: Move Item to Product B
+                        selectedBacklogItem.setStatus(StatusEnum.PRODUCT_BL);
+                        databaseManager.update_BacklogItem(selectedBacklogItem);
 
                         ProductBacklog_Fragment fragment = ProductBacklog_Fragment.newInstance();
 
@@ -183,7 +184,8 @@ public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_
                         backlogItemList.remove(selectedBacklogItem);
                         notifyDataSetChanged();
 
-                        //ToDo: Move Item to Scrumboard
+                        selectedBacklogItem.setStatus(StatusEnum.TODO);
+                        databaseManager.update_BacklogItem(selectedBacklogItem);
 
                         Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Scrumboard", Toast.LENGTH_LONG).show();
                         break;
@@ -204,7 +206,8 @@ public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_
                         backlogItemList.remove(selectedBacklogItem);
                         notifyDataSetChanged();
 
-                        //ToDo: Move Item to Product BL
+                        selectedBacklogItem.setStatus(StatusEnum.PRODUCT_BL);
+                        databaseManager.update_BacklogItem(selectedBacklogItem);
 
                         Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Product Backlog", Toast.LENGTH_LONG).show();
                         break;
@@ -212,7 +215,8 @@ public class BacklogItem_Adapter_Logic extends RecyclerView.Adapter<BacklogItem_
                         backlogItemList.remove(selectedBacklogItem);
                         notifyDataSetChanged();
 
-                        //ToDo: Move Item to Sprint BL
+                        selectedBacklogItem.setStatus(StatusEnum.SPRINT_BL);
+                        databaseManager.update_BacklogItem(selectedBacklogItem);
 
                         Toast.makeText(context, "Successfully moved '" + selectedBacklogItem.getTitle() + "' to Sprint Backlog", Toast.LENGTH_LONG).show();
                         break;

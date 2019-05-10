@@ -1,5 +1,6 @@
 package at.htl_villach.scrumable.app;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -61,7 +62,7 @@ public class ProductBacklog_Fragment extends Fragment {
 
         recyclerViewProductBacklog.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItem_Adapter_Logic(backlogItemList, getActivity(), Popup_Option_Menu_Enum.PRODUCT_BACKLOG, getActivity(), recyclerViewProductBacklog);
+        adapter = new BacklogItem_Adapter_Logic(backlogItemList, getActivity(), Popup_Option_Menu_Enum.PRODUCT_BACKLOG);
 
         recyclerViewProductBacklog.setLayoutManager(layoutManager);
         recyclerViewProductBacklog.setAdapter(adapter);
@@ -71,7 +72,7 @@ public class ProductBacklog_Fragment extends Fragment {
             public void onItemClick(int position) {
                 Intent intent = new Intent(getContext(), DetailsActivity.class);
                 intent.putExtra("selectedListItemObj", backlogItemList.get(position));
-                startActivity(intent);
+                startActivityForResult(intent, 10);
             }
         });
 
@@ -104,5 +105,19 @@ public class ProductBacklog_Fragment extends Fragment {
         ItemTouchHelper.Callback callback = new BacklogItem_Adapter_DragAndDrop(adapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(recyclerViewProductBacklog);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 10) {
+            if(resultCode == Activity.RESULT_OK) {
+                backlogItemList.clear();
+                backlogItemList.addAll(databaseManager.fetch_BacklogItem(0, StatusEnum.PRODUCT_BL));
+                adapter.notifyDataSetChanged();
+            }
+            if(resultCode == Activity.RESULT_CANCELED) {
+
+            }
+        }
     }
 }

@@ -69,7 +69,7 @@ public class Testing_Fragment extends Fragment {
 
         recyclerViewTesting.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItem_Adapter_Logic(backlogItemList, getActivity(), Popup_Option_Menu_Enum.SCRUMBOARD, getActivity(), recyclerViewTesting);
+        adapter = new BacklogItem_Adapter_Logic(backlogItemList, getActivity(), Popup_Option_Menu_Enum.SCRUMBOARD);
 
         recyclerViewTesting.setLayoutManager(layoutManager);
         recyclerViewTesting.setAdapter(adapter);

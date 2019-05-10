@@ -80,7 +80,7 @@ public class SprintBacklog_Fragment extends Fragment {
         recyclerViewSprintBacklog.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
 
-        adapter = new BacklogItem_Adapter_Logic(backlogItemList, getActivity(), Popup_Option_Menu_Enum.SPRINT_BACKLOG, getActivity(), recyclerViewSprintBacklog);
+        adapter = new BacklogItem_Adapter_Logic(backlogItemList, getActivity(), Popup_Option_Menu_Enum.SPRINT_BACKLOG);
 
         recyclerViewSprintBacklog.setLayoutManager(layoutManager);
         recyclerViewSprintBacklog.setAdapter(adapter);

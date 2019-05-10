@@ -69,7 +69,7 @@ public class Done_Fragment extends Fragment {
 
         recyclerViewDone.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItem_Adapter_Logic(backlogItemList, getActivity(), Popup_Option_Menu_Enum.SCRUMBOARD, getActivity(), recyclerViewDone);
+        adapter = new BacklogItem_Adapter_Logic(backlogItemList, getActivity(), Popup_Option_Menu_Enum.SCRUMBOARD);
 
         recyclerViewDone.setLayoutManager(layoutManager);
         recyclerViewDone.setAdapter(adapter);

@@ -68,7 +68,7 @@ public class ToDo_Fragment extends Fragment {
 
         recyclerViewToDo.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItem_Adapter_Logic(backlogItemList, getActivity(), Popup_Option_Menu_Enum.SCRUMBOARD, getActivity(), recyclerViewToDo);
+        adapter = new BacklogItem_Adapter_Logic(backlogItemList, getActivity(), Popup_Option_Menu_Enum.SCRUMBOARD);
 
         recyclerViewToDo.setLayoutManager(layoutManager);
         recyclerViewToDo.setAdapter(adapter);
