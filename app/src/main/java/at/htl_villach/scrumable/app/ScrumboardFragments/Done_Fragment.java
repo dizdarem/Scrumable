@@ -21,20 +21,22 @@ import java.util.Date;
 
 import at.htl_villach.scrumable.R;
 import at.htl_villach.scrumable.app.DetailsActivity;
+import at.htl_villach.scrumable.app.SprintBacklog_Fragment;
 import at.htl_villach.scrumable.bll.BacklogItem;
 import at.htl_villach.scrumable.bll.BacklogItem_Adapter_DragAndDrop;
 import at.htl_villach.scrumable.bll.BacklogItem_Adapter_Logic;
 import at.htl_villach.scrumable.bll.Popup_Option_Menu_Enum;
 import at.htl_villach.scrumable.bll.StatusEnum;
 import at.htl_villach.scrumable.bll.User;
+import at.htl_villach.scrumable.dal.DatabaseManager;
 
 public class Done_Fragment extends Fragment {
     private RecyclerView recyclerViewDone;
     private BacklogItem_Adapter_Logic adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<BacklogItem> testDataList;
 
-    private FrameLayout flDone;
+    private ArrayList<BacklogItem> backlogItemList;
+    private DatabaseManager databaseManager;
 
     public static Done_Fragment newInstance(String param1, String param2) {
         Done_Fragment fragment = new Done_Fragment();
@@ -60,14 +62,14 @@ public class Done_Fragment extends Fragment {
     }
 
     private void initControls(View view) {
-        testDataList = new ArrayList<>();
-
-        flDone = (FrameLayout)view.findViewById(R.id.flDone);
-
+        databaseManager = new DatabaseManager(Done_Fragment.this.getContext());
+        databaseManager.open();
         recyclerViewDone = view.findViewById(R.id.recyclerViewDone);
+        backlogItemList = databaseManager.fetch_BacklogItem(0, StatusEnum.DONE);
+
         recyclerViewDone.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItem_Adapter_Logic(generateTestData(), getActivity(), Popup_Option_Menu_Enum.SCRUMBOARD, getActivity(), recyclerViewDone);
+        adapter = new BacklogItem_Adapter_Logic(backlogItemList, getActivity(), Popup_Option_Menu_Enum.SCRUMBOARD, getActivity(), recyclerViewDone);
 
         recyclerViewDone.setLayoutManager(layoutManager);
         recyclerViewDone.setAdapter(adapter);
@@ -76,7 +78,7 @@ public class Done_Fragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getContext(), DetailsActivity.class);
-                intent.putExtra("selectedListItemObj", testDataList.get(position));
+                intent.putExtra("selectedListItemObj", backlogItemList.get(position));
                 startActivity(intent);
             }
         });
@@ -96,15 +98,15 @@ public class Done_Fragment extends Fragment {
                 int position = target.getAdapterPosition();
 
                 if (direction == ItemTouchHelper.LEFT && tabLayout.getSelectedTabPosition() == 3) {
-                    testDataList.remove(position);
+                    backlogItemList.remove(position);
                     adapter.notifyDataSetChanged();
                     tabLayout.getTabAt(2).select();
 
                     Toast.makeText(getContext(), "Successful shift", Toast.LENGTH_LONG).show();
                 } else if (direction == ItemTouchHelper.RIGHT && tabLayout.getSelectedTabPosition() == 3) {    //if swipe left
-                    BacklogItem backlogItem_toDelete = testDataList.get(position);
-                    testDataList.remove(position);
-                    testDataList.add(position, backlogItem_toDelete);
+                    BacklogItem backlogItem_toDelete = backlogItemList.get(position);
+                    backlogItemList.remove(position);
+                    backlogItemList.add(position, backlogItem_toDelete);
                     adapter.notifyDataSetChanged();
 
                     Toast.makeText(getContext(), "Cannot move to no existing tab", Toast.LENGTH_LONG).show();
@@ -118,14 +120,6 @@ public class Done_Fragment extends Fragment {
         ItemTouchHelper.Callback callback = new BacklogItem_Adapter_DragAndDrop(adapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(recyclerViewDone);
-    }
-
-    private ArrayList<BacklogItem> generateTestData() {
-        for(int i=1; i<=5; i++) {
-            User user = new User("User_" + i, "User_" + i, new Date());
-            testDataList.add(new BacklogItem(i, "Done_ " + i, "Describtion of Done_"+ i, StatusEnum.DONE, user));
-        }
-        return testDataList;
     }
 
     public interface OnFragmentInteractionListener {

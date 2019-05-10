@@ -12,6 +12,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,12 +26,15 @@ import at.htl_villach.scrumable.bll.BacklogItem_Adapter_Logic;
 import at.htl_villach.scrumable.bll.Popup_Option_Menu_Enum;
 import at.htl_villach.scrumable.bll.StatusEnum;
 import at.htl_villach.scrumable.bll.User;
+import at.htl_villach.scrumable.dal.DatabaseManager;
 
 public class ProductBacklog_Fragment extends Fragment {
     private RecyclerView recyclerViewProductBacklog;
     private BacklogItem_Adapter_Logic adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<BacklogItem> testDataList;
+
+    private DatabaseManager databaseManager;
+    private ArrayList<BacklogItem> backlogItemList;
 
     public static ProductBacklog_Fragment newInstance() {
         ProductBacklog_Fragment fragment = new ProductBacklog_Fragment();
@@ -49,12 +54,14 @@ public class ProductBacklog_Fragment extends Fragment {
     }
 
     private void initControls(View view) {
+        databaseManager = new DatabaseManager(ProductBacklog_Fragment.this.getContext());
+        databaseManager.open();
         recyclerViewProductBacklog = (RecyclerView)view.findViewById(R.id.recyclerViewProductBacklog);
-        testDataList = new ArrayList<>();
+        backlogItemList = databaseManager.fetch_BacklogItem(0, StatusEnum.PRODUCT_BL);
 
         recyclerViewProductBacklog.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItem_Adapter_Logic(generateTestData(), getActivity(), Popup_Option_Menu_Enum.PRODUCT_BACKLOG, getActivity(), recyclerViewProductBacklog);
+        adapter = new BacklogItem_Adapter_Logic(backlogItemList, getActivity(), Popup_Option_Menu_Enum.PRODUCT_BACKLOG, getActivity(), recyclerViewProductBacklog);
 
         recyclerViewProductBacklog.setLayoutManager(layoutManager);
         recyclerViewProductBacklog.setAdapter(adapter);
@@ -63,7 +70,7 @@ public class ProductBacklog_Fragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getContext(), DetailsActivity.class);
-                intent.putExtra("selectedListItemObj", testDataList.get(position));
+                intent.putExtra("selectedListItemObj", backlogItemList.get(position));
                 startActivity(intent);
             }
         });
@@ -82,9 +89,9 @@ public class ProductBacklog_Fragment extends Fragment {
                 int position = target.getAdapterPosition();
 
                 if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
-                    BacklogItem backlogItem_toDelete = testDataList.get(position);
-                    testDataList.remove(position);
-                    testDataList.add(position, backlogItem_toDelete);
+                    BacklogItem backlogItem_toDelete = backlogItemList.get(position);
+                    backlogItemList.remove(position);
+                    backlogItemList.add(position, backlogItem_toDelete);
                     adapter.notifyDataSetChanged();
                     Toast.makeText(getContext(), "Cannot move to no existing tab", Toast.LENGTH_LONG).show();
                 }
@@ -97,28 +104,5 @@ public class ProductBacklog_Fragment extends Fragment {
         ItemTouchHelper.Callback callback = new BacklogItem_Adapter_DragAndDrop(adapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(recyclerViewProductBacklog);
-    }
-
-    private ArrayList<BacklogItem> generateTestData() {
-        for(int i=1; i<=5; i++) {
-            User user = new User("User_" + i, "User_" + i, new Date());
-            testDataList.add(new BacklogItem(i, "Product_BL_ " + i, "Describtion of Product BL"+ i, StatusEnum.PRODUCT_BL, user));
-        }
-        return testDataList;
-    }
-
-    public void addListItem(BacklogItem selectedBacklogItem) {
-        testDataList.add(selectedBacklogItem);
-        adapter.notifyDataSetChanged();
-    }
-
-    public  void updateListItem(BacklogItem selectedBacklogItem) {
-        testDataList.add(selectedBacklogItem.getId(),selectedBacklogItem);
-        adapter.notifyDataSetChanged();
-    }
-
-    public void removeListItem(BacklogItem selectedBacklogItem) {
-        testDataList.remove(selectedBacklogItem);
-        adapter.notifyDataSetChanged();
     }
 }

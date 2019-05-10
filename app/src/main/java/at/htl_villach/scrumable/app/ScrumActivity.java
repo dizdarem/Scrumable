@@ -8,15 +8,23 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.EventLogTags;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.Date;
+
 import at.htl_villach.scrumable.R;
+import at.htl_villach.scrumable.bll.BacklogItem;
+import at.htl_villach.scrumable.bll.StatusEnum;
+import at.htl_villach.scrumable.bll.User;
+import at.htl_villach.scrumable.dal.DatabaseManager;
 
 public class ScrumActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private DatabaseManager databaseManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +35,11 @@ public class ScrumActivity extends AppCompatActivity
     private void initControls(Bundle paramSavedInstanceState) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        databaseManager = new DatabaseManager(this);
+        databaseManager.open();
+
+        generateTextData();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -114,5 +127,24 @@ public class ScrumActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private  void generateTextData() {
+        User user1 = new User("User_1", "1234", new Date());
+        User user2 = new User("User_2", "1234", new Date());
+        User user3 = new User("User_3", "1234", new Date());
+
+        databaseManager.insert_User(user1);
+        databaseManager.insert_User(user2);
+        databaseManager.insert_User(user3);
+
+        for(int i=1; i<=5; i++) {
+            databaseManager.insert_BacklogItem(new BacklogItem(i, "ProductBL_"+i, "Description of UserStory_"+i, StatusEnum.PRODUCT_BL, user1));
+            databaseManager.insert_BacklogItem(new BacklogItem(i, "SprintBl_"+i, "Description of UserStory_"+i, StatusEnum.SPRINT_BL, user2));
+            databaseManager.insert_BacklogItem(new BacklogItem(i, "ToDo_"+i, "Description of UserStory_"+i, StatusEnum.TODO, user3));
+            databaseManager.insert_BacklogItem(new BacklogItem(i, "InProcess_"+i, "Description of UserStory_"+i, StatusEnum.IN_PROCESS, user2));
+            databaseManager.insert_BacklogItem(new BacklogItem(i, "Testing_"+i, "Description of UserStory_"+i, StatusEnum.TESTING, user3));
+            databaseManager.insert_BacklogItem(new BacklogItem(i, "Done_"+i, "Description of UserStory_"+i, StatusEnum.DONE, user1));
+        }
     }
 }

@@ -20,18 +20,22 @@ import java.util.Date;
 
 import at.htl_villach.scrumable.R;
 import at.htl_villach.scrumable.app.DetailsActivity;
+import at.htl_villach.scrumable.app.SprintBacklog_Fragment;
 import at.htl_villach.scrumable.bll.BacklogItem;
 import at.htl_villach.scrumable.bll.BacklogItem_Adapter_DragAndDrop;
 import at.htl_villach.scrumable.bll.BacklogItem_Adapter_Logic;
 import at.htl_villach.scrumable.bll.Popup_Option_Menu_Enum;
 import at.htl_villach.scrumable.bll.StatusEnum;
 import at.htl_villach.scrumable.bll.User;
+import at.htl_villach.scrumable.dal.DatabaseManager;
 
 public class InProcess_Fragment extends Fragment {
     private RecyclerView recyclerViewInProcess;
     private BacklogItem_Adapter_Logic adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<BacklogItem> testDataList;
+
+    private ArrayList<BacklogItem> backlogItemList;
+    private DatabaseManager databaseManager;
 
     public static InProcess_Fragment newInstance(String param1, String param2) {
         InProcess_Fragment fragment = new InProcess_Fragment();
@@ -57,12 +61,14 @@ public class InProcess_Fragment extends Fragment {
     }
 
     private void initControls(View view) {
-        testDataList = new ArrayList<>();
-
+        databaseManager = new DatabaseManager(InProcess_Fragment.this.getContext());
+        databaseManager.open();
         recyclerViewInProcess = view.findViewById(R.id.recyclerViewInProcess);
+        backlogItemList = databaseManager.fetch_BacklogItem(0, StatusEnum.IN_PROCESS);
+
         recyclerViewInProcess.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new BacklogItem_Adapter_Logic(generateTestData(), getActivity(), Popup_Option_Menu_Enum.SCRUMBOARD, getActivity(), recyclerViewInProcess);
+        adapter = new BacklogItem_Adapter_Logic(backlogItemList, getActivity(), Popup_Option_Menu_Enum.SCRUMBOARD, getActivity(), recyclerViewInProcess);
 
         recyclerViewInProcess.setLayoutManager(layoutManager);
         recyclerViewInProcess.setAdapter(adapter);
@@ -71,7 +77,7 @@ public class InProcess_Fragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(getContext(), DetailsActivity.class);
-                intent.putExtra("selectedListItemObj", testDataList.get(position));
+                intent.putExtra("selectedListItemObj", backlogItemList.get(position));
                 startActivity(intent);
             }
         });
@@ -91,12 +97,12 @@ public class InProcess_Fragment extends Fragment {
                 int position = target.getAdapterPosition();
 
                 if (direction == ItemTouchHelper.LEFT && tabLayout.getSelectedTabPosition() == 1) {
-                    testDataList.remove(position);
+                    backlogItemList.remove(position);
                     adapter.notifyDataSetChanged();
                     Toast.makeText(getContext(), "Successful shift", Toast.LENGTH_LONG).show();
                     tabLayout.getTabAt(0).select();
                 } else  if (direction == ItemTouchHelper.RIGHT && tabLayout.getSelectedTabPosition() == 1) {
-                    testDataList.remove(position);
+                    backlogItemList.remove(position);
                     adapter.notifyDataSetChanged();
                     Toast.makeText(getContext(), "Successful shift", Toast.LENGTH_LONG).show();
                     tabLayout.getTabAt(2).select();
@@ -110,14 +116,6 @@ public class InProcess_Fragment extends Fragment {
         ItemTouchHelper.Callback callback = new BacklogItem_Adapter_DragAndDrop(adapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(recyclerViewInProcess);
-    }
-
-    private ArrayList<BacklogItem> generateTestData() {
-        for(int i=1; i<=5; i++) {
-            User user = new User("User_" + i, "User_" + i, new Date());
-            testDataList.add(new BacklogItem(i, "InProcess_ " + i, "Describtion of InProcess_"+ i, StatusEnum.IN_PROCESS, user));
-        }
-        return testDataList;
     }
 
     public interface OnFragmentInteractionListener {

@@ -17,15 +17,18 @@ import at.htl_villach.scrumable.bll.User;
 
 public class DatabaseManager {
     private Context context;
-    private SQLiteDatabase database;
+    private SQLiteDatabase database_BacklogItems;
+    private SQLiteDatabase database_Users;
 
     public DatabaseManager(Context context ) {
         this.context = context;
     }
 
     public void open() throws SQLException {
-        DatabaseHelperBacklogItem databaseHelper = new DatabaseHelperBacklogItem(this.context);
-        database = databaseHelper.getWritableDatabase();
+        DatabaseHelperBacklogItem databaseHelperBacklogItem = new DatabaseHelperBacklogItem(this.context);
+        DatabaseHelperUser databaseHelperUser = new DatabaseHelperUser(this.context);
+        database_BacklogItems = databaseHelperBacklogItem.getWritableDatabase();
+        database_Users = databaseHelperUser.getWritableDatabase();
     }
 
     public ArrayList<BacklogItem> fetch_BacklogItem(int paramBacklogItemId, StatusEnum paramStatus){
@@ -45,7 +48,7 @@ public class DatabaseManager {
             }
         }
 
-        Cursor cursor = database.query(DatabaseHelperBacklogItem.TABLE_NAME, columns, where, whereArgs, null, null, null, null );
+        Cursor cursor = database_BacklogItems.query(DatabaseHelperBacklogItem.TABLE_NAME, columns, where, whereArgs, null, null, null, null );
 
         if( cursor != null){
             while(cursor.moveToNext()){
@@ -75,7 +78,7 @@ public class DatabaseManager {
             whereArgs = new String[]{paramUsername};
         }
 
-        Cursor cursor = database.query(DatabaseHelperUser.TABLE_NAME, columns, where, whereArgs, null, null, null, null );
+        Cursor cursor = database_Users.query(DatabaseHelperUser.TABLE_NAME, columns, where, whereArgs, null, null, null, null );
 
         if( cursor != null){
             while(cursor.moveToNext()){
@@ -101,7 +104,7 @@ public class DatabaseManager {
         contentValues.put(DatabaseHelperBacklogItem.DESCRIBTION, paramBacklogItem.getDescribtion());
         contentValues.put(DatabaseHelperBacklogItem.STATUS, paramBacklogItem.getStatus().toString());
         contentValues.put(DatabaseHelperBacklogItem.USER, paramBacklogItem.getEditor().toString());
-        database.insert(DatabaseHelperBacklogItem.TABLE_NAME, null, contentValues );
+        database_BacklogItems.insert(DatabaseHelperBacklogItem.TABLE_NAME, null, contentValues );
     }
 
     public void insert_User(User paramUser){
@@ -109,15 +112,15 @@ public class DatabaseManager {
         contentValues.put(DatabaseHelperUser.USERNAME, paramUser.getUsername());
         contentValues.put(DatabaseHelperUser.PASSWORD, paramUser.getPassword());
         contentValues.put(DatabaseHelperUser.DATE, paramUser.getDate().toString());
-        database.insert(DatabaseHelperUser.TABLE_NAME, null, contentValues );
+        database_Users.insert(DatabaseHelperUser.TABLE_NAME, null, contentValues );
     }
 
     public void delete_BacklogItem(int id) {
-        database.delete(DatabaseHelperBacklogItem.TABLE_NAME, DatabaseHelperBacklogItem.ID + "=?", new String[]{String.valueOf(id)});
+        database_BacklogItems.delete(DatabaseHelperBacklogItem.TABLE_NAME, DatabaseHelperBacklogItem.ID + "=?", new String[]{String.valueOf(id)});
     }
 
     public void delete_User(String username) {
-        database.delete(DatabaseHelperUser.TABLE_NAME, DatabaseHelperUser.USERNAME + "=?", new String[]{username});
+        database_Users.delete(DatabaseHelperUser.TABLE_NAME, DatabaseHelperUser.USERNAME + "=?", new String[]{username});
     }
 
     public int update_BacklogItem(BacklogItem paramBacklogItem){
@@ -126,7 +129,7 @@ public class DatabaseManager {
         contentValues.put(DatabaseHelperBacklogItem.DESCRIBTION, paramBacklogItem.getDescribtion());
         contentValues.put(DatabaseHelperBacklogItem.STATUS, paramBacklogItem.getStatus().toString());
         contentValues.put(DatabaseHelperBacklogItem.USER, paramBacklogItem.getEditor().toString());
-        int nrOfUpdatedRows = database.update(DatabaseHelperBacklogItem.TABLE_NAME, contentValues, DatabaseHelperBacklogItem.ID + "=?", new String[]{String.valueOf(paramBacklogItem.getId())});
+        int nrOfUpdatedRows = database_BacklogItems.update(DatabaseHelperBacklogItem.TABLE_NAME, contentValues, DatabaseHelperBacklogItem.ID + "=?", new String[]{String.valueOf(paramBacklogItem.getId())});
         return nrOfUpdatedRows;
     }
 
@@ -135,7 +138,7 @@ public class DatabaseManager {
         contentValues.put(DatabaseHelperUser.USERNAME, paramUser.getUsername());
         contentValues.put(DatabaseHelperUser.PASSWORD, paramUser.getPassword());
         contentValues.put(DatabaseHelperUser.DATE, paramUser.getDate().toString());
-        int nrOfUpdatedRows = database.update(DatabaseHelperUser.TABLE_NAME, contentValues, DatabaseHelperUser.USERNAME + "=?", new String[]{paramUser.getUsername()});
+        int nrOfUpdatedRows = database_Users.update(DatabaseHelperUser.TABLE_NAME, contentValues, DatabaseHelperUser.USERNAME + "=?", new String[]{paramUser.getUsername()});
         return nrOfUpdatedRows;
     }
 }
