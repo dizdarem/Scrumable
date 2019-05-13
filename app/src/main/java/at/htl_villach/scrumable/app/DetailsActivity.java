@@ -157,6 +157,7 @@ public class DetailsActivity extends AppCompatActivity {
                     Intent intent = new Intent(DetailsActivity.this, ScrumActivity.class);
                     BacklogItem editedbacklogItem = new BacklogItem(backlogItem.getId(), etTitle.getText().toString(), etDescription.getText().toString(), (StatusEnum) cbStatus.getSelectedItem(), (User) cbEditor.getSelectedItem());
                     intent.putExtra("selectedListItemObj", editedbacklogItem);
+                    databaseManager.update_BacklogItem(editedbacklogItem);
                     startActivity(intent);
                     Toast.makeText(DetailsActivity.this, "Successful Update", Toast.LENGTH_LONG).show();
                 }

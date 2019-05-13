@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.htl_villach.scrumable.R;
+import at.htl_villach.scrumable.bll.BacklogItem;
 import at.htl_villach.scrumable.bll.StatusEnum;
 import at.htl_villach.scrumable.bll.User;
 import at.htl_villach.scrumable.dal.DatabaseManager;
@@ -67,12 +68,11 @@ public class AddBacklogItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String title = etTitle.getText().toString();
-               // final String edtior = cbEditor.getSelectedItem().toString();
+                final String editor = cbEditor.getSelectedItem().toString();
                 final String status = cbStatus.getSelectedItem().toString();
                 final String description = etDescription.getText().toString();
                 Intent main = new Intent(AddBacklogItemActivity.this, ScrumActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
                 startActivity(main);
             }
         });
