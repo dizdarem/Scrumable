@@ -28,6 +28,13 @@ public class Scrumboard_Fragment extends Fragment implements ToDo_Fragment.OnFra
         View view = inflater.inflate(R.layout.fragment_scrumboard, container, false);
         TabLayout tabLayout = (TabLayout)view.findViewById(R.id.tablayout);
         //Scrumboard Tab-Columns
+        //TabLayout.Tab tabToDo = new TabLayout.Tab();
+        //ViewPager pager = (ViewPager) view.findViewById(R.id.pager);
+        //ScrumboardPagerAdapter a = (ScrumboardPagerAdapter) pager.getAdapter();
+        //tabToDo.setTag( a.getItem(0));
+        //tabToDo.setText("ToDo");
+        //tabLayout.addTab(tabToDo);
+
         tabLayout.addTab(tabLayout.newTab().setText("ToDo"));
         tabLayout.addTab(tabLayout.newTab().setText("In Process"));
         tabLayout.addTab(tabLayout.newTab().setText("Testing"));

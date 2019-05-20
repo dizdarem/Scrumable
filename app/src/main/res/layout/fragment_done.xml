@@ -7,9 +7,9 @@
     android:orientation="horizontal">
 
     <FrameLayout
-        android:id="@+id/flDone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:tag="@string/FRAGMENT_DONE_TAG">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewDone"
             android:layout_width="match_parent"
@@ -19,6 +19,4 @@
             android:scrollbars="vertical">
         </android.support.v7.widget.RecyclerView>
     </FrameLayout>
-
-
 </RelativeLayout>

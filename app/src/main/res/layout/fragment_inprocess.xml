@@ -6,12 +6,17 @@
     tools:context=".app.ScrumboardFragments.InProcess_Fragment"
     android:orientation="horizontal">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewInProcess"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="4dp"
-        android:background="@android:color/darker_gray"
-        android:scrollbars="vertical">
-    </android.support.v7.widget.RecyclerView>
+        android:tag="@string/FRAGMENT_INPROCESS_TAG">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewInProcess"
+            android:layout_width="match_parent"
+            android:padding="4dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"
+            android:scrollbars="vertical">
+        </android.support.v7.widget.RecyclerView>
+    </FrameLayout>
 </RelativeLayout>

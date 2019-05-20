@@ -15,7 +15,7 @@ public class ScrumboardPagerAdapter extends FragmentStatePagerAdapter {
     * Create Fragment when pressed on specific tab
     * */
     int nrOfTabs;
-
+    Fragment toDo = ToDo_Fragment.newInstance("", "");
     public ScrumboardPagerAdapter(FragmentManager fm, int nrOfTabs) {
         super(fm);
         this.nrOfTabs = nrOfTabs;
@@ -26,7 +26,7 @@ public class ScrumboardPagerAdapter extends FragmentStatePagerAdapter {
         Fragment fragment = null;
         switch (i) {
             case 0:
-                fragment = ToDo_Fragment.newInstance("", "");
+                fragment =  toDo;
                 break;
             case 1:
                 fragment = InProcess_Fragment.newInstance("", "");

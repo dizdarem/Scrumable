@@ -92,15 +92,24 @@ public class Testing_Fragment extends Fragment {
             public void onSwiped(@NonNull RecyclerView.ViewHolder target, int direction) {
                 TabLayout tabLayout = (TabLayout)getActivity().findViewById(R.id.tablayout);
                 int position = target.getAdapterPosition();
+                BacklogItem backlogItemToUpdate = backlogItemList.get(position);
 
                 if (direction == ItemTouchHelper.LEFT && tabLayout.getSelectedTabPosition() == 2) {
                     backlogItemList.remove(position);
                     adapter.notifyDataSetChanged();
+
+                    backlogItemToUpdate.setStatus(StatusEnum.IN_PROCESS);
+                    databaseManager.update_BacklogItem(backlogItemToUpdate);
+
                     Toast.makeText(getContext(), "Successful shift", Toast.LENGTH_LONG).show();
                     tabLayout.getTabAt(1).select();
                 } else  if (direction == ItemTouchHelper.RIGHT && tabLayout.getSelectedTabPosition() == 2) {
                     backlogItemList.remove(position);
                     adapter.notifyDataSetChanged();
+
+                    backlogItemToUpdate.setStatus(StatusEnum.DONE);
+                    databaseManager.update_BacklogItem(backlogItemToUpdate);
+
                     Toast.makeText(getContext(), "Successful shift", Toast.LENGTH_LONG).show();
                     tabLayout.getTabAt(3).select();
                 }

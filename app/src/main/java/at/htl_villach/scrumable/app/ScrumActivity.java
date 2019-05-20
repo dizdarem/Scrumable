@@ -1,8 +1,11 @@
 package at.htl_villach.scrumable.app;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,6 +24,7 @@ import at.htl_villach.scrumable.dal.DatabaseManager;
 
 public class ScrumActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private Fragment currentFragment;
 
     private DatabaseManager databaseManager;
     @Override
@@ -88,8 +92,9 @@ public class ScrumActivity extends AppCompatActivity
                 //toDo: open new Intent
                 break;
             case R.id.logout:
-                Intent myIntent = new Intent(ScrumActivity.this, StartActivity.class);
-                ScrumActivity.this.startActivity(myIntent);
+                Intent intent = new Intent(ScrumActivity.this, StartActivity.class);
+                //ToDo: build real logout
+                ScrumActivity.this.startActivity(intent);
                 break;
         }
 
@@ -116,9 +121,9 @@ public class ScrumActivity extends AppCompatActivity
                 setTitle(R.string.mitem_Scrumboard);
                 break;
             case R.id.mitemAddUS:
-                Intent myIntent = new Intent(ScrumActivity.this, AddBacklogItemActivity.class);
-                ScrumActivity.this.startActivity(myIntent);
-                setTitle(R.string.addUS);
+                Intent intent = new Intent(ScrumActivity.this, AddBacklogItemActivity.class);
+                currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container_scrum);
+                ScrumActivity.this.startActivityForResult(intent, 10);
                 break;
         }
 
@@ -127,7 +132,7 @@ public class ScrumActivity extends AppCompatActivity
         return true;
     }
 
-    private  void generateTextData() {
+    private void generateTextData() {
         User user1 = new User("User_1", "1234", new Date());
         User user2 = new User("User_2", "1234", new Date());
         User user3 = new User("User_3", "1234", new Date());
@@ -143,6 +148,19 @@ public class ScrumActivity extends AppCompatActivity
             databaseManager.insert_BacklogItem(new BacklogItem(i, "InProcess_"+i, "Description of UserStory_"+i, StatusEnum.IN_PROCESS, user2));
             databaseManager.insert_BacklogItem(new BacklogItem(i, "Testing_"+i, "Description of UserStory_"+i, StatusEnum.TESTING, user3));
             databaseManager.insert_BacklogItem(new BacklogItem(i, "Done_"+i, "Description of UserStory_"+i, StatusEnum.DONE, user1));
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == 10) {
+            if(resultCode == Activity.RESULT_OK) {
+                //Toast.makeText(ScrumActivity.this, currentFragment.getTargetFragment().toString(), Toast.LENGTH_LONG).show();
+                //TODO: reload the fragment you are in
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_scrum, currentFragment).commit();
+            }
+            if(resultCode == Activity.RESULT_CANCELED) {
+            }
         }
     }
 }

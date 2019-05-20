@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,7 +27,7 @@ import at.htl_villach.scrumable.bll.Popup_Option_Menu_Enum;
 import at.htl_villach.scrumable.bll.StatusEnum;
 import at.htl_villach.scrumable.dal.DatabaseManager;
 
-public class InProcess_Fragment extends Fragment {
+public class InProcess_Fragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView recyclerViewInProcess;
     private BacklogItem_Adapter_Logic adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -38,6 +39,7 @@ public class InProcess_Fragment extends Fragment {
         InProcess_Fragment fragment = new InProcess_Fragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -92,15 +94,25 @@ public class InProcess_Fragment extends Fragment {
             public void onSwiped(@NonNull RecyclerView.ViewHolder target, int direction) {
                 TabLayout tabLayout = (TabLayout)getActivity().findViewById(R.id.tablayout);
                 int position = target.getAdapterPosition();
+                BacklogItem backlogItemToUpdate = backlogItemList.get(position);
 
                 if (direction == ItemTouchHelper.LEFT && tabLayout.getSelectedTabPosition() == 1) {
                     backlogItemList.remove(position);
                     adapter.notifyDataSetChanged();
+                    //TabLayout.Tab tab = tabLayout.getTabAt(0);
+                    //((TabLayout.Tab) tab).getTag();
+                    backlogItemToUpdate.setStatus(StatusEnum.TODO);
+                    databaseManager.update_BacklogItem(backlogItemToUpdate);
+
                     Toast.makeText(getContext(), "Successful shift", Toast.LENGTH_LONG).show();
                     tabLayout.getTabAt(0).select();
                 } else  if (direction == ItemTouchHelper.RIGHT && tabLayout.getSelectedTabPosition() == 1) {
                     backlogItemList.remove(position);
                     adapter.notifyDataSetChanged();
+
+                    backlogItemToUpdate.setStatus(StatusEnum.TESTING);
+                    databaseManager.update_BacklogItem(backlogItemToUpdate);
+
                     Toast.makeText(getContext(), "Successful shift", Toast.LENGTH_LONG).show();
                     tabLayout.getTabAt(2).select();
                 }
@@ -113,6 +125,11 @@ public class InProcess_Fragment extends Fragment {
         ItemTouchHelper.Callback callback = new BacklogItem_Adapter_DragAndDrop(adapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(recyclerViewInProcess);
+    }
+
+    @Override
+    public void onRefresh() {
+
     }
 
     public interface OnFragmentInteractionListener {

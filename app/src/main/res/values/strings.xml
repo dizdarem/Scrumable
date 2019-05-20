@@ -36,4 +36,8 @@
     <string name="passwordNotCorrect">Password is not correct</string>
     <string name="confPasswordCorrect">Confirm Password is not correct</string>
     <string name="confPasswordNotCorrect">Conf Password is correct</string>
+    <string name="FRAGMENT_DONE_TAG">FRAGMENT_DONE_TAG</string>
+    <string name="FRAGMENT_INPROCESS_TAG">FRAGMENT_INPROCESS_TAG</string>
+    <string name="FRAGMENT_TESTING_TAG">FRAGMENT_TESTING_TAG</string>
+    <string name="FRAGMENT_TODO_TAG">FRAGMENT_TODO_TAG</string>
 </resources>

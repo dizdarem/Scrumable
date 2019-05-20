@@ -92,11 +92,18 @@ public class ToDo_Fragment extends Fragment {
             public void onSwiped(@NonNull RecyclerView.ViewHolder target, int direction) {
                 TabLayout tabLayout = (TabLayout)getActivity().findViewById(R.id.tablayout);
                 int position = target.getAdapterPosition();
+                BacklogItem backlogItemToUpdate = backlogItemList.get(position);
 
                 if (direction == ItemTouchHelper.RIGHT && tabLayout.getSelectedTabPosition() == 0) {    //if swipe left
                     backlogItemList.remove(position);
                     adapter.notifyDataSetChanged();
+
+                    backlogItemToUpdate.setStatus(StatusEnum.IN_PROCESS);
+                    databaseManager.update_BacklogItem(backlogItemToUpdate);
+
                     Toast.makeText(getContext(), "Successful shift", Toast.LENGTH_LONG).show();
+
+                    TabLayout.Tab tab = tabLayout.getTabAt(1);
                     tabLayout.getTabAt(1).select();
                 } else if (direction == ItemTouchHelper.LEFT && tabLayout.getSelectedTabPosition() == 0) {    //if swipe left
                     BacklogItem backlogItem_toDelete = backlogItemList.get(position);

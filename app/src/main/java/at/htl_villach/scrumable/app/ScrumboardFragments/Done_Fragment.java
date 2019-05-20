@@ -94,12 +94,17 @@ public class Done_Fragment extends Fragment {
                 int position = target.getAdapterPosition();
 
                 if (direction == ItemTouchHelper.LEFT && tabLayout.getSelectedTabPosition() == 3) {
-                    backlogItemList.remove(position);
+                    BacklogItem backlogItemToUpdate = backlogItemList.get(position);
                     adapter.notifyDataSetChanged();
+
+                    //ToDo: Changed this stuff
+                    backlogItemToUpdate.setStatus(StatusEnum.TESTING);
+                    databaseManager.update_BacklogItem(backlogItemToUpdate);
+
                     tabLayout.getTabAt(2).select();
 
                     Toast.makeText(getContext(), "Successful shift", Toast.LENGTH_LONG).show();
-                } else if (direction == ItemTouchHelper.RIGHT && tabLayout.getSelectedTabPosition() == 3) {    //if swipe left
+                } else if (direction == ItemTouchHelper.RIGHT && tabLayout.getSelectedTabPosition() == 3) {
                     BacklogItem backlogItem_toDelete = backlogItemList.get(position);
                     backlogItemList.remove(position);
                     backlogItemList.add(position, backlogItem_toDelete);
