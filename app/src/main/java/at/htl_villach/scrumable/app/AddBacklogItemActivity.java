@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,6 @@ public class AddBacklogItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent main = new Intent(AddBacklogItemActivity.this, ScrumActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
                 startActivity(main);
             }
         });
@@ -68,12 +68,14 @@ public class AddBacklogItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String title = etTitle.getText().toString();
-                final String editor = cbEditor.getSelectedItem().toString();
-                final String status = cbStatus.getSelectedItem().toString();
+                final User editor = new User(cbEditor.getSelectedItem().toString());
+                final StatusEnum status = StatusEnum.valueOf(cbStatus.getSelectedItem().toString());
                 final String description = etDescription.getText().toString();
-                Intent main = new Intent(AddBacklogItemActivity.this, ScrumActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(main);
+
+                    databaseManager.insert_BacklogItem(new BacklogItem(-99, title, description, status, editor));
+                    Intent main = new Intent(AddBacklogItemActivity.this, ScrumActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(main);
             }
         });
     }

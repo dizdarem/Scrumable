@@ -116,7 +116,7 @@ public class DatabaseManager {
     }
 
     public void delete_BacklogItem(int id) {
-        database_BacklogItems.delete(DatabaseHelperBacklogItem.TABLE_NAME, DatabaseHelperBacklogItem.ID + "=?", new String[]{String.valueOf(id)});
+        database_BacklogItems.delete(DatabaseHelperBacklogItem.TABLE_NAME, DatabaseHelperBacklogItem.ID + " = " + id, null);
     }
 
     public void delete_User(String username) {
@@ -129,7 +129,7 @@ public class DatabaseManager {
         contentValues.put(DatabaseHelperBacklogItem.DESCRIBTION, paramBacklogItem.getDescribtion());
         contentValues.put(DatabaseHelperBacklogItem.STATUS, paramBacklogItem.getStatus().toString());
         contentValues.put(DatabaseHelperBacklogItem.USER, paramBacklogItem.getEditor().toString());
-        int nrOfUpdatedRows = database_BacklogItems.update(DatabaseHelperBacklogItem.TABLE_NAME, contentValues, DatabaseHelperBacklogItem.ID + "=?", new String[]{String.valueOf(paramBacklogItem.getId())});
+        int nrOfUpdatedRows = database_BacklogItems.update(DatabaseHelperBacklogItem.TABLE_NAME, contentValues, DatabaseHelperBacklogItem.ID + " = " + paramBacklogItem.getId(),null);
         return nrOfUpdatedRows;
     }
 

@@ -4,8 +4,14 @@
     <item
         android:id="@+id/mitem_EditUserStory"
         android:orderInCategory="100"
+        android:theme="@style/AppTheme.NoActionBar"
         android:title="Edit Userstory"
-        android:theme = "@style/AppTheme.NoActionBar"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mitem_DeleteUserStory"
+        android:orderInCategory="100"
+        android:theme="@style/AppTheme.NoActionBar"
+        android:title="Delete Userstory"
         app:showAsAction="never" />
 
 </menu>

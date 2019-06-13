@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -60,7 +61,6 @@ public class DetailsActivity extends AppCompatActivity {
         etTitle.setText(backlogItem.getTitle());
         fillComboboxEditor();
         fillComboboxStatus();
-
         cbEditor.setEnabled(false);
         cbStatus.setEnabled(false);
 
@@ -75,8 +75,8 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void fillComboboxEditor() {
-        List<User> list = databaseManager.fetch_Users(null);
-
+        List<User> list = new ArrayList<User>();
+        list.addAll(databaseManager.fetch_Users(null));
         cbEditor.setAdapter(new ArrayAdapter<User>(DetailsActivity.this, android.R.layout.simple_list_item_1, list));
     }
 
@@ -125,14 +125,21 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.option_edituserstory, menu);
+        getMenuInflater().inflate(R.menu.option_edit_delete_user_story, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.mitem_EditUserStory) {
+        if(id == R.id.mitem_DeleteUserStory){
+            databaseManager.delete_BacklogItem(backlogItem.getId());
+
+            Intent home_intent = new Intent(getApplicationContext(), ScrumActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(home_intent);
+        }
+        else if (id == R.id.mitem_EditUserStory) {
             etTitle = (EditText) findViewById(R.id.etTitle);
             cbEditor = (Spinner) findViewById(R.id.cbEditor);
             cbStatus = (Spinner) findViewById(R.id.cbStatus);
@@ -154,11 +161,12 @@ public class DetailsActivity extends AppCompatActivity {
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(DetailsActivity.this, ScrumActivity.class);
                     BacklogItem editedbacklogItem = new BacklogItem(backlogItem.getId(), etTitle.getText().toString(), etDescription.getText().toString(), (StatusEnum) cbStatus.getSelectedItem(), (User) cbEditor.getSelectedItem());
-                    intent.putExtra("selectedListItemObj", editedbacklogItem);
                     databaseManager.update_BacklogItem(editedbacklogItem);
-                    startActivity(intent);
+
+                    Intent home_intent = new Intent(getApplicationContext(), ScrumActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(home_intent);
                     Toast.makeText(DetailsActivity.this, "Successful Update", Toast.LENGTH_LONG).show();
                 }
             });

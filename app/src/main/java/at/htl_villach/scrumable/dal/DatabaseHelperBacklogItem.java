@@ -15,7 +15,7 @@ public class DatabaseHelperBacklogItem extends SQLiteOpenHelper {
     static final String USER = "user";
 
     private static final String DB_NAME = "HTL_VILLACH_SCRUMABLE_BACKLOGITEMS.DB";
-    private static final int DB_VERSION = 5;
+    private static final int DB_VERSION = 8;
 
     private static final String CREATE_TABLE_BACKLOGITEM = "create table "+TABLE_NAME+" ( _id INTEGER PRIMARY KEY AUTOINCREMENT, "+TITLE
             + " TEXT NOT NULL UNIQUE, " + DESCRIBTION + " TEXT NOT NULL, " + STATUS + " TEXT NOT NULL, " + USER + " TEXT NOT NULL); ";

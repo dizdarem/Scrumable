@@ -41,7 +41,9 @@ public class ScrumActivity extends AppCompatActivity
         databaseManager = new DatabaseManager(this);
         databaseManager.open();
 
-        generateTextData();
+        if(databaseManager.fetch_BacklogItem(0,null).size() == 0) {
+                generateTextData();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
